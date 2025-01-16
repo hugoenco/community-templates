@@ -1,0 +1,2732 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>7.0</version>
+    <template_groups>
+        <template_group>
+            <uuid>e09a78974bc04d63a339665f0fbb652d</uuid>
+            <name>Integra-W</name>
+        </template_group>
+        <template_group>
+            <uuid>e2342a5fe1c0462fa3e76a9dff8cb85e</uuid>
+            <name>SAF equipment</name>
+        </template_group>
+    </template_groups>
+    <templates>
+        <template>
+            <uuid>9e6e40d81b374f7e8f89979b016578a1</uuid>
+            <template>SAF BASIC Integra-W template V30 for Zabbix 7.0</template>
+            <name>SAF BASIC Integra-W template V30 for Zabbix 7.0</name>
+            <description>Contacts: saftehnika.com,  techsupport@saftehnika.com.
+Advanced template for SAF radio Integra-W</description>
+            <groups>
+                <group>
+                    <name>Integra-W</name>
+                </group>
+                <group>
+                    <name>SAF equipment</name>
+                </group>
+            </groups>
+            <items>
+                <item>
+                    <uuid>6f8eb72631304f03aa26ec8a382a5c8e</uuid>
+                    <name>FW version</name>
+                    <type>DEPENDENT</type>
+                    <key>FWversion</key>
+                    <delay>0</delay>
+                    <history>10d</history>
+                    <value_type>CHAR</value_type>
+                    <trends>0</trends>
+                    <preprocessing>
+                        <step>
+                            <type>REGEX</type>
+                            <parameters>
+                                <parameter>Vers: ([^ ]*);</parameter>
+                                <parameter>\1</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>integraW_sysinfo</key>
+                    </master_item>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>1 Overall Display</value>
+                        </tag>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>7 System</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>332b6e3f0061454493a72059b0840f93</uuid>
+                            <expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/FWversion)&lt;&gt;last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/FWversion,#2)</expression>
+                            <name>FW changed</name>
+                            <priority>INFO</priority>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>784be53116444d7480890cbbf4c4f16f</uuid>
+                    <name>ICMP ping</name>
+                    <type>SIMPLE</type>
+                    <key>icmpping</key>
+                    <history>1w</history>
+                    <valuemap>
+                        <name>Service state</name>
+                    </valuemap>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>5 Status</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>d97eac6a1a3b4bf5b506d91fedff3480</uuid>
+                            <expression>max(/SAF BASIC Integra-W template V30 for Zabbix 7.0/icmpping,#3)=0</expression>
+                            <name>Unavailable by ICMP ping</name>
+                            <priority>HIGH</priority>
+                            <description>Last three attempts returned timeout.  Please check device connectivity.</description>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>27ceb3949ffc4c9daa75ada2eb6ef49b</uuid>
+                    <name>ICMP loss</name>
+                    <type>SIMPLE</type>
+                    <key>icmppingloss</key>
+                    <history>1w</history>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>5 Status</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>623b1e4bfbfb47d9892097ce6f7844da</uuid>
+                            <expression>min(/SAF BASIC Integra-W template V30 for Zabbix 7.0/icmppingloss,5m)&gt;{$ICMP_LOSS_WARN} and min(/SAF BASIC Integra-W template V30 for Zabbix 7.0/icmppingloss,5m)&lt;100</expression>
+                            <name>High ICMP ping loss</name>
+                            <opdata>Loss: {ITEM.LASTVALUE1}</opdata>
+                            <priority>WARNING</priority>
+                            <manual_close>YES</manual_close>
+                            <dependencies>
+                                <dependency>
+                                    <name>Unavailable by ICMP ping</name>
+                                    <expression>max(/SAF BASIC Integra-W template V30 for Zabbix 7.0/icmpping,#3)=0</expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>bafd55cda189485fa80416c0cd2b997c</uuid>
+                    <name>ICMP response time</name>
+                    <type>SIMPLE</type>
+                    <key>icmppingsec</key>
+                    <history>1w</history>
+                    <value_type>FLOAT</value_type>
+                    <units>s</units>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>5 Status</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>283ebfbf524f4c27907b25d7a5c53559</uuid>
+                            <expression>avg(/SAF BASIC Integra-W template V30 for Zabbix 7.0/icmppingsec,5m)&gt;{$ICMP_RESPONSE_TIME_WARN}</expression>
+                            <name>High ICMP ping response time</name>
+                            <opdata>Value: {ITEM.LASTVALUE1}</opdata>
+                            <priority>WARNING</priority>
+                            <manual_close>YES</manual_close>
+                            <dependencies>
+                                <dependency>
+                                    <name>High ICMP ping loss</name>
+                                    <expression>min(/SAF BASIC Integra-W template V30 for Zabbix 7.0/icmppingloss,5m)&gt;{$ICMP_LOSS_WARN} and min(/SAF BASIC Integra-W template V30 for Zabbix 7.0/icmppingloss,5m)&lt;100</expression>
+                                </dependency>
+                                <dependency>
+                                    <name>Unavailable by ICMP ping</name>
+                                    <expression>max(/SAF BASIC Integra-W template V30 for Zabbix 7.0/icmpping,#3)=0</expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>77ab03687ce249028f55811bd95f91a3</uuid>
+                    <name>Location latitude</name>
+                    <type>DEPENDENT</type>
+                    <key>IntB_LocLat</key>
+                    <delay>0</delay>
+                    <history>90d</history>
+                    <value_type>TEXT</value_type>
+                    <trends>0</trends>
+                    <inventory_link>LOCATION_LAT</inventory_link>
+                    <preprocessing>
+                        <step>
+                            <type>REGEX</type>
+                            <parameters>
+                                <parameter>([^ ]*),</parameter>
+                                <parameter>\1</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>integraWsystem.47.0</key>
+                    </master_item>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>7 System</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>f21558a23b064765bb1edd6e9022bd50</uuid>
+                    <name>Location longitude</name>
+                    <type>DEPENDENT</type>
+                    <key>IntB_LocLon</key>
+                    <delay>0</delay>
+                    <history>90d</history>
+                    <value_type>TEXT</value_type>
+                    <trends>0</trends>
+                    <inventory_link>LOCATION_LON</inventory_link>
+                    <preprocessing>
+                        <step>
+                            <type>REGEX</type>
+                            <parameters>
+                                <parameter>,([^ ]*)</parameter>
+                                <parameter>\1</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>integraWsystem.47.0</key>
+                    </master_item>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>7 System</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>60b4026903e34dfcace5585ee20f3c16</uuid>
+                    <name>LAN port administrative state</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.5.1.1.7.1]</snmp_oid>
+                    <key>integraWifPortAdminStatus_LAN</key>
+                    <history>10d</history>
+                    <valuemap>
+                        <name>SAF 3 states</name>
+                    </valuemap>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>4 Ethernet</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>1d36cd155b7e4854afa8d442f11f7e0f</uuid>
+                            <expression>(last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/integraWifPortAdminStatus_LAN,#1)&lt;&gt;last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/integraWifPortAdminStatus_LAN,#2))=1</expression>
+                            <name>LAN port administrative status changed</name>
+                            <priority>WARNING</priority>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                        <trigger>
+                            <uuid>63e8bdcb7067497796bfc6a71c894a1b</uuid>
+                            <expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/integraWifPortAdminStatus_LAN)=2</expression>
+                            <name>LAN port disable</name>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>fda6c1282fb84864a88ad60d9c17dd28</uuid>
+                    <name>LAN3 port administrative state</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.5.1.1.7.3]</snmp_oid>
+                    <key>integraWifPortAdminStatus_LAN3</key>
+                    <history>10d</history>
+                    <status>DISABLED</status>
+                    <valuemap>
+                        <name>SAF 3 states</name>
+                    </valuemap>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>4 Ethernet</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>ef442688de754b1c8c6695664af0c6fb</uuid>
+                            <expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/integraWifPortAdminStatus_LAN3)=2</expression>
+                            <name>LAN3 port disabled</name>
+                            <status>DISABLED</status>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>017708e4cfe14174af3b7f249d8bc2fe</uuid>
+                    <name>MNG port administrative state</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.5.1.1.7.2]</snmp_oid>
+                    <key>integraWifPortAdminStatus_MNG</key>
+                    <history>10d</history>
+                    <valuemap>
+                        <name>SAF 3 states</name>
+                    </valuemap>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>4 Ethernet</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>f95310fe79d340dd8f47a1974a3e2720</uuid>
+                            <expression>(last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/integraWifPortAdminStatus_MNG,#1)&lt;&gt;last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/integraWifPortAdminStatus_MNG,#2))=1</expression>
+                            <name>MNG port administrative status changed</name>
+                            <priority>WARNING</priority>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                        <trigger>
+                            <uuid>f9826b4862c04cb2afe16a73b7ebfa31</uuid>
+                            <expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/integraWifPortAdminStatus_MNG)=2</expression>
+                            <name>MNG port disabled</name>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>727a32cc8a344004a616079a4db0b11c</uuid>
+                    <name>LAN port duplex</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.5.1.1.11.1]</snmp_oid>
+                    <key>integraWifPortDuplexStatus_LAN</key>
+                    <history>10d</history>
+                    <valuemap>
+                        <name>SAF Ethernet port duplex</name>
+                    </valuemap>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>4 Ethernet</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>15dc56be21114ff0b04b6c31f06ecd16</uuid>
+                    <name>LAN3 port duplex</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.5.1.1.11.3]</snmp_oid>
+                    <key>integraWifPortDuplexStatus_LAN3</key>
+                    <history>10d</history>
+                    <status>DISABLED</status>
+                    <valuemap>
+                        <name>SAF Ethernet port duplex</name>
+                    </valuemap>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>4 Ethernet</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>f4fbcad65a1b49f3a6185535beb4be09</uuid>
+                    <name>MNG port duplex</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.5.1.1.11.2]</snmp_oid>
+                    <key>integraWifPortDuplexStatus_MNG</key>
+                    <history>10d</history>
+                    <valuemap>
+                        <name>SAF Ethernet port duplex</name>
+                    </valuemap>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>4 Ethernet</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>9228b42cb7284967b9f423a5a68db2f9</uuid>
+                    <name>LAN port operational state</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.5.1.1.8.1]</snmp_oid>
+                    <key>integraWifPortOperStatus_LAN</key>
+                    <history>10d</history>
+                    <valuemap>
+                        <name>SAF_ports Operational status</name>
+                    </valuemap>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>4 Ethernet</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>3cee0cd9f6f14dc28d71a713b95b7b4d</uuid>
+                            <expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/integraWifPortOperStatus_LAN)=2</expression>
+                            <name>LAN port DOWN</name>
+                            <priority>HIGH</priority>
+                            <manual_close>YES</manual_close>
+                            <dependencies>
+                                <dependency>
+                                    <name>LAN port disable</name>
+                                    <expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/integraWifPortAdminStatus_LAN)=2</expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>fe8578e53ca34cd19a002f467a51d9c8</uuid>
+                    <name>LAN3 port operational state</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.5.1.1.8.3]</snmp_oid>
+                    <key>integraWifPortOperStatus_LAN3</key>
+                    <history>10d</history>
+                    <status>DISABLED</status>
+                    <valuemap>
+                        <name>SAF_ports Operational status</name>
+                    </valuemap>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>4 Ethernet</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>f28e6eadcb634a35a7f12ef95722bae4</uuid>
+                            <expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/integraWifPortOperStatus_LAN3)=2</expression>
+                            <name>LAN3 Port down</name>
+                            <status>DISABLED</status>
+                            <priority>HIGH</priority>
+                            <manual_close>YES</manual_close>
+                            <dependencies>
+                                <dependency>
+                                    <name>LAN3 port disabled</name>
+                                    <expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/integraWifPortAdminStatus_LAN3)=2</expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>45f77c948229491faa5efa68ce434b72</uuid>
+                    <name>MNG port operational state</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.5.1.1.8.2]</snmp_oid>
+                    <key>integraWifPortOperStatus_MNG</key>
+                    <history>10d</history>
+                    <valuemap>
+                        <name>SAF_ports Operational status</name>
+                    </valuemap>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>4 Ethernet</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>b8cc7cc7a97b42e199d16895cf18122d</uuid>
+                            <expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/integraWifPortOperStatus_MNG)=2</expression>
+                            <name>MNG port DOWN</name>
+                            <priority>HIGH</priority>
+                            <manual_close>YES</manual_close>
+                            <dependencies>
+                                <dependency>
+                                    <name>MNG port disabled</name>
+                                    <expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/integraWifPortAdminStatus_MNG)=2</expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>73ec8cd6334243cd953edc7293d718e7</uuid>
+                    <name>Modem synchronization status</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.3.4.0]</snmp_oid>
+                    <key>integraWmodemSyncLoss</key>
+                    <history>10d</history>
+                    <value_type>CHAR</value_type>
+                    <trends>0</trends>
+                    <valuemap>
+                        <name>SAF Integra W modem lock</name>
+                    </valuemap>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>2 Modem</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>355cda6062c5434baf9de176324cea60</uuid>
+                            <expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/integraWmodemSyncLoss)&lt;&gt;1</expression>
+                            <name>Modem synchronization loss</name>
+                            <priority>DISASTER</priority>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>f9fa587bde52461d99b0fe846c70ce56</uuid>
+                    <name>ATPC Rx (remote) max level</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.2.16.0]</snmp_oid>
+                    <key>integraWradioAtpcRxLevelMax</key>
+                    <history>90d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>dBm</units>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>1 Overall Display</value>
+                        </tag>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>3 Radio</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>a2ffba11e3724b6587e3e9538e453220</uuid>
+                    <name>ATPC Rx (remote) min level</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.2.15.0]</snmp_oid>
+                    <key>integraWradioAtpcRxLevelMin</key>
+                    <history>90d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>dBm</units>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>1 Overall Display</value>
+                        </tag>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>3 Radio</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>f65c4fa45b31428cbf38e7bbbfb25d03</uuid>
+                    <name>ATPC status</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.2.13.0]</snmp_oid>
+                    <key>integraWradioAtpcState</key>
+                    <history>90d</history>
+                    <valuemap>
+                        <name>SAF ATPC 3 states</name>
+                    </valuemap>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>1 Overall Display</value>
+                        </tag>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>3 Radio</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>5b3b4cb77bc545569da798cdaa8c002d</uuid>
+                    <name>Duplex shift $1</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.2.6.0]</snmp_oid>
+                    <key>integraWradioDuplexShift</key>
+                    <history>90d</history>
+                    <trends>0</trends>
+                    <units>!MHz</units>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <parameters>
+                                <parameter>0.001</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>1 Overall Display</value>
+                        </tag>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>3 Radio</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>84f724b030cc40e98f4fd48248ef405e</uuid>
+                    <name>Tx mute $1</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.2.5.0]</snmp_oid>
+                    <key>integraWradioTxMute</key>
+                    <history>90d</history>
+                    <value_type>CHAR</value_type>
+                    <trends>0</trends>
+                    <valuemap>
+                        <name>SAF radio Tx Mute</name>
+                    </valuemap>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>3 Radio</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>61682d1ce49c4b418f55de7d0a3ed5f4</uuid>
+                            <expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/integraWradioTxMute)=1 or last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/integraWradioTxMute)=3</expression>
+                            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                            <recovery_expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/integraWradioTxMute)=2</recovery_expression>
+                            <name>Tx muted</name>
+                            <priority>HIGH</priority>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>c985f9c8a906476b9f5bad3212ecfa6a</uuid>
+                    <name>LAN Rx throughput</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.5.2.1.8.1]</snmp_oid>
+                    <key>integraWrxBytesLAN</key>
+                    <history>10d</history>
+                    <units>bps</units>
+                    <description>Rx bitrate averaged for last minute</description>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <parameters>
+                                <parameter>8</parameter>
+                            </parameters>
+                        </step>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>6 Traffic</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>1671cf6e7b694e3c99f87aa97b7c23ef</uuid>
+                    <name>MNG Rx throughput</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.5.2.1.8.2]</snmp_oid>
+                    <key>integraWrxBytesMNG</key>
+                    <history>10d</history>
+                    <units>bps</units>
+                    <description>Rx bitrate averaged for last minute</description>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <parameters>
+                                <parameter>8</parameter>
+                            </parameters>
+                        </step>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>6 Traffic</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>cce174f4f0d14dbb8f63f18e6f923ac7</uuid>
+                    <name>WAN Rx throughput</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.5.2.1.8.3]</snmp_oid>
+                    <key>integraWrxBytesWAN</key>
+                    <history>10d</history>
+                    <units>bps</units>
+                    <description>Rx bitrate averaged for last minute, FOR OUTBAND FW</description>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <parameters>
+                                <parameter>8</parameter>
+                            </parameters>
+                        </step>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>6 Traffic</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>60332d78524048238171f7968f423872</uuid>
+                    <name>LAN Rx packets dropped</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.5.2.1.5.1]</snmp_oid>
+                    <key>integraWrxDroppedLAN</key>
+                    <history>10d</history>
+                    <units>b</units>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <parameters>
+                                <parameter>8</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>6 Traffic</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>42f9635299b94852ad1057307b8461fd</uuid>
+                            <expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/integraWrxDroppedLAN)&gt;last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/integraWrxDroppedLAN)</expression>
+                            <name>LAN port dropping Rx packets</name>
+                            <priority>HIGH</priority>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>e361f37455e24d019914df9fa4028f5a</uuid>
+                    <name>MNG Rx packets dropped</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.5.2.1.5.2]</snmp_oid>
+                    <key>integraWrxDroppedMNG</key>
+                    <history>10d</history>
+                    <units>b</units>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <parameters>
+                                <parameter>8</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>6 Traffic</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>aa4083e327e54dc7ab46290609fd3b82</uuid>
+                            <expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/integraWrxDroppedMNG)&gt;last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/integraWrxDroppedMNG)</expression>
+                            <name>MNG port dropping Rx packets</name>
+                            <priority>HIGH</priority>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>3a280d5d0e6b43c880957684793f6a37</uuid>
+                    <name>WAN Rx packets dropped</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.5.2.1.5.3]</snmp_oid>
+                    <key>integraWrxDropWAN</key>
+                    <history>10d</history>
+                    <units>b</units>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <parameters>
+                                <parameter>8</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>6 Traffic</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>d6dc211293e54abb8ce6d62b836a3239</uuid>
+                            <expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/integraWrxDropWAN)&gt;last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/integraWrxDropWAN)</expression>
+                            <name>WAN port dropping Rx packets</name>
+                            <priority>HIGH</priority>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>f83d708446484c89953adc54d941644f</uuid>
+                    <name>Product code</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.4.13.0]</snmp_oid>
+                    <key>integraWsysDeviceProductModel</key>
+                    <history>1d</history>
+                    <value_type>CHAR</value_type>
+                    <trends>0</trends>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>1 Overall Display</value>
+                        </tag>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>7 System</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>09c921cc98154635bf1259ab2b7bb805</uuid>
+                    <name>Model</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.4.11.0]</snmp_oid>
+                    <key>integraWsysDeviceType</key>
+                    <history>1d</history>
+                    <value_type>CHAR</value_type>
+                    <trends>0</trends>
+                    <inventory_link>TYPE</inventory_link>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>1 Overall Display</value>
+                        </tag>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>7 System</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>07edda8ddb584ee9841e996ae39fbe12</uuid>
+                    <name>Coordinates</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.4.47.0]</snmp_oid>
+                    <key>integraWsystem.47.0</key>
+                    <history>90d</history>
+                    <value_type>TEXT</value_type>
+                    <trends>0</trends>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>7 System</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>bd3d699bab2b4cd89d2f9bbd9d66fbb7</uuid>
+                    <name>Link Rx throughput</name>
+                    <type>CALCULATED</type>
+                    <key>integraWtrafficRX</key>
+                    <history>10d</history>
+                    <units>bps</units>
+                    <params>last(//integraWrxBytesLAN)+last(//integraWrxBytesMNG)+last(//integraWrxBytesWAN)</params>
+                    <description>Link Rx bitrate averaged for last minute, FOR OUTBAND FW</description>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>6 Traffic</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>eec64c84feb84982950087817d53f35f</uuid>
+                    <name>Link Tx throughput</name>
+                    <type>CALCULATED</type>
+                    <key>integraWtrafficTX</key>
+                    <history>10d</history>
+                    <units>bps</units>
+                    <params>last(//integraWtxBytesLAN)+last(//integraWtxBytesMNG)+last(//integraWtxBytesWAN)+last(//integraWtxBytesWAN)</params>
+                    <description>Link Rx bitrate averaged for last minute, FOR OUTBAND FW</description>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>6 Traffic</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>7f75c328524f4ba4ad2b85b80399f30d</uuid>
+                    <name>LAN Tx throughput</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.5.2.1.9.1]</snmp_oid>
+                    <key>integraWtxBytesLAN</key>
+                    <history>10d</history>
+                    <units>bps</units>
+                    <description>Tx bitrate averaged for last minute</description>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <parameters>
+                                <parameter>8</parameter>
+                            </parameters>
+                        </step>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>6 Traffic</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>86f4f27397cd4086b1bf57b5aef7fc86</uuid>
+                    <name>MNG Tx throughput</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.5.2.1.9.2]</snmp_oid>
+                    <key>integraWtxBytesMNG</key>
+                    <history>10d</history>
+                    <units>bps</units>
+                    <description>Tx bitrate averaged for last minute</description>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <parameters>
+                                <parameter>8</parameter>
+                            </parameters>
+                        </step>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>6 Traffic</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>a84a510f7bc64e2888f8f9258630b8c3</uuid>
+                    <name>WAN Tx throughput</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.5.2.1.9.3]</snmp_oid>
+                    <key>integraWtxBytesWAN</key>
+                    <history>10d</history>
+                    <units>bps</units>
+                    <description>Rx bitrate averaged for last minute, FOR OUTBAND FW</description>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <parameters>
+                                <parameter>8</parameter>
+                            </parameters>
+                        </step>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <parameters>
+                                <parameter/>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>6 Traffic</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>cb68c83cac1e46e7a95894818582da7e</uuid>
+                    <name>LAN Tx packets dropped</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.5.2.1.7.1]</snmp_oid>
+                    <key>integraWtxDroppedLAN</key>
+                    <history>10d</history>
+                    <units>b</units>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <parameters>
+                                <parameter>8</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>6 Traffic</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>dbd735a0d83e4639a9f97a595db9c664</uuid>
+                            <expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/integraWtxDroppedLAN)&gt;last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/integraWtxDroppedLAN)</expression>
+                            <name>LAN port dropping Tx packets</name>
+                            <priority>HIGH</priority>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>7a1895e7c2f746849bf30f3a970d51be</uuid>
+                    <name>MNG Tx packets dropped</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.5.2.1.7.2]</snmp_oid>
+                    <key>integraWtxDroppedMNG</key>
+                    <history>10d</history>
+                    <units>b</units>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <parameters>
+                                <parameter>8</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>6 Traffic</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>a77ac362c87b4409864a892e3dd165d8</uuid>
+                            <expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/integraWtxDroppedMNG)&gt;last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/integraWtxDroppedMNG)</expression>
+                            <name>MNG port dropping Tx packets</name>
+                            <priority>HIGH</priority>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>d46db346e41141ce84c15ee04271f49d</uuid>
+                    <name>WAN Tx packets dropped</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.5.2.1.7.3]</snmp_oid>
+                    <key>integraWtxDropWAN</key>
+                    <history>10d</history>
+                    <units>b</units>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <parameters>
+                                <parameter>8</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>6 Traffic</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>68391eb9fea94758b5bb79338e06b87d</uuid>
+                            <expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/integraWtxDropWAN)&gt;last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/integraWtxDropWAN)</expression>
+                            <name>WAN port dropping Tx packets</name>
+                            <priority>HIGH</priority>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>a9fe301ba40c477e9bab2c2793512cb0</uuid>
+                    <name>Integra W system info</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.4.14.3.0]</snmp_oid>
+                    <key>integraW_sysinfo</key>
+                    <history>10d</history>
+                    <value_type>TEXT</value_type>
+                    <trends>0</trends>
+                    <inventory_link>TYPE_FULL</inventory_link>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>7 System</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>a994b0da158f49ca83716a819944b359</uuid>
+                    <name>LAN3 Port Speed</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.5.1.1.5.3]</snmp_oid>
+                    <key>LAN3_integraWifPortHighSpeed</key>
+                    <history>10d</history>
+                    <status>DISABLED</status>
+                    <units>!Mbps</units>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <parameters>
+                                <parameter>1.0E-6</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>4 Ethernet</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>d4e46eda54c54757a0e3a5ebdeaf5a82</uuid>
+                    <name>LAN Port Speed</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.5.1.1.5.1]</snmp_oid>
+                    <key>LAN_integraWifPortHighSpeed</key>
+                    <history>10d</history>
+                    <units>!Mbps</units>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <parameters>
+                                <parameter>1.0E-6</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>4 Ethernet</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>3c5f73cd3938470b93ad4ae41eaed751</uuid>
+                    <name>MNG IP address</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.9.1.0]</snmp_oid>
+                    <key>mngIPaddress</key>
+                    <history>25h</history>
+                    <value_type>TEXT</value_type>
+                    <trends>0</trends>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>7 System</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>737ecde0266448c89382d66e369614f9</uuid>
+                    <name>MNG Port Speed</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.5.1.1.5.2]</snmp_oid>
+                    <key>MNG_integraWifPortHighSpeed</key>
+                    <history>10d</history>
+                    <units>!Mbps</units>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <parameters>
+                                <parameter>1.0E-6</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>4 Ethernet</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>78ca3f3f481b44d88ea355b7348e7126</uuid>
+                    <name>Serial number</name>
+                    <type>DEPENDENT</type>
+                    <key>radioSN</key>
+                    <delay>0</delay>
+                    <history>10d</history>
+                    <value_type>CHAR</value_type>
+                    <trends>0</trends>
+                    <preprocessing>
+                        <step>
+                            <type>REGEX</type>
+                            <parameters>
+                                <parameter>N: ([\d]*)</parameter>
+                                <parameter>\1</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>integraW_sysinfo</key>
+                    </master_item>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>1 Overall Display</value>
+                        </tag>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>7 System</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>a23322f57d9c4740a7a282e475db3b96</uuid>
+                            <expression>change(/SAF BASIC Integra-W template V30 for Zabbix 7.0/radioSN)=1</expression>
+                            <name>Radio HW changed</name>
+                            <priority>INFO</priority>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>eefd9c3aafb64e10a059b4864fcb32c2</uuid>
+                    <name>ACM Engine status</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.3.12.0]</snmp_oid>
+                    <key>SAF-INTEGRAW-MIB_integraWmodemACMengine</key>
+                    <history>60m</history>
+                    <trends>0</trends>
+                    <description>ACM engine status</description>
+                    <valuemap>
+                        <name>SAF ACM engine status</name>
+                    </valuemap>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>1 Overall Display</value>
+                        </tag>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>2 Modem</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>9d12150924eb491db13dec802df90432</uuid>
+                    <name>Data Acquire status</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.3.1.0]</snmp_oid>
+                    <key>SAF-INTEGRAW-MIB_integraWmodemAcquireStatus</key>
+                    <history>1h</history>
+                    <trends>0</trends>
+                    <description>This is the current status of modem data acquire when queried modem status.</description>
+                    <valuemap>
+                        <name>SAF Modem acquire staus</name>
+                    </valuemap>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>2 Modem</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>87646b632c6149a192100eee55278606</uuid>
+                            <expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWmodemAcquireStatus)=3</expression>
+                            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                            <recovery_expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWmodemAcquireStatus)=2</recovery_expression>
+                            <name>Modem Acquire Status Failed</name>
+                            <priority>DISASTER</priority>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                        <trigger>
+                            <uuid>31953957d87e4786ba845fd38dfaea58</uuid>
+                            <expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWmodemAcquireStatus)=1</expression>
+                            <name>Modem Acquire Status in Progress</name>
+                            <priority>HIGH</priority>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>3b99e9efba464ab5bf1faf900718ae4d</uuid>
+                    <name>Bandwidth</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.3.6.0]</snmp_oid>
+                    <key>SAF-INTEGRAW-MIB_integraWmodemBandwidth</key>
+                    <history>1h</history>
+                    <trends>0</trends>
+                    <units>MHz</units>
+                    <description>Signal bandwidth</description>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <parameters>
+                                <parameter>0.001</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>1 Overall Display</value>
+                        </tag>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>2 Modem</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>06c4b946bdd3448aa1efef8a9d1669e8</uuid>
+                    <name>FEC load</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.3.3.0]</snmp_oid>
+                    <key>SAF-INTEGRAW-MIB_integraWmodemFECload</key>
+                    <history>90d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <description>Decoder stress or FEC load value</description>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>3 Radio</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>7bb73c28e014497bb87e76448982dd5d</uuid>
+                            <expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWmodemFECload)={$FECLOADMAX}</expression>
+                            <name>FEC load increased</name>
+                            <priority>HIGH</priority>
+                            <manual_close>YES</manual_close>
+                            <dependencies>
+                                <dependency>
+                                    <name>Modem Acquire Status Failed</name>
+                                    <expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWmodemAcquireStatus)=3</expression>
+                                    <recovery_expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWmodemAcquireStatus)=2</recovery_expression>
+                                </dependency>
+                                <dependency>
+                                    <name>PLL status ERROR</name>
+                                    <expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWradioPLL)=1</expression>
+                                    <recovery_expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWradioPLL)=2</recovery_expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>39306c27c7144f3382bb920ade6498fb</uuid>
+                    <name>Maximal configured modulation $1</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.3.7.0]</snmp_oid>
+                    <key>SAF-INTEGRAW-MIB_integraWmodemModulation</key>
+                    <delay>1h</delay>
+                    <history>12h</history>
+                    <description>Modem profile chosen by user</description>
+                    <preprocessing>
+                        <step>
+                            <type>REGEX</type>
+                            <parameters>
+                                <parameter>(\d+)</parameter>
+                                <parameter>\1</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>2 Modem</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>3a02e51e38734904bccef54d928a388b</uuid>
+                    <name>Signal quality</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.3.14.0]</snmp_oid>
+                    <key>SAF-INTEGRAW-MIB_integraWmodemRadialMse</key>
+                    <history>10d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <description>Current radial MSE value</description>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>2 Modem</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>a696c37fc0344e2cb8cd0ffd11504db8</uuid>
+                            <expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWmodemRadialMse)&lt;={$SIGQUAL}</expression>
+                            <name>Signal quality low alarm</name>
+                            <priority>HIGH</priority>
+                            <description>Radial MSE level too high</description>
+                            <manual_close>YES</manual_close>
+                            <dependencies>
+                                <dependency>
+                                    <name>Modem Acquire Status Failed</name>
+                                    <expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWmodemAcquireStatus)=3</expression>
+                                    <recovery_expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWmodemAcquireStatus)=2</recovery_expression>
+                                </dependency>
+                                <dependency>
+                                    <name>PLL status ERROR</name>
+                                    <expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWradioPLL)=1</expression>
+                                    <recovery_expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWradioPLL)=2</recovery_expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>20d2468f7ee14256b53cb9e59c978158</uuid>
+                    <name>Modem capacity Rx</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.3.10.0]</snmp_oid>
+                    <key>SAF-INTEGRAW-MIB_integraWmodemRxCapacity</key>
+                    <history>10d</history>
+                    <units>Mbps</units>
+                    <description>Rx ethernet current capacity in kilobits per second</description>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <parameters>
+                                <parameter>0.001</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>2 Modem</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>87675911dcb343688ad2a3ad49d9ee37</uuid>
+                            <expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWmodemRxCapacity)&lt;&gt;last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWmodemRxCapacity,#2)</expression>
+                            <name>Modulation changed</name>
+                            <priority>WARNING</priority>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>62e1296dbb134cd0abd971e7948b1f59</uuid>
+                    <name>Modulation Rx actual</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.3.8.0]</snmp_oid>
+                    <key>SAF-INTEGRAW-MIB_integraWmodemRxModulation</key>
+                    <history>12h</history>
+                    <units>!QAM</units>
+                    <description>Current (actual) Rx Modulation</description>
+                    <preprocessing>
+                        <step>
+                            <type>REGEX</type>
+                            <parameters>
+                                <parameter>(\d+)</parameter>
+                                <parameter>\1</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>2 Modem</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>a31e503c71dc434e9b8ce2878dc4fbe1</uuid>
+                    <name>Modem capacity Tx</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.3.11.0]</snmp_oid>
+                    <key>SAF-INTEGRAW-MIB_integraWmodemTxCapacity</key>
+                    <history>10d</history>
+                    <units>Mbps</units>
+                    <description>Tx ethernet current capacity in kilobits per second</description>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <parameters>
+                                <parameter>0.001</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>2 Modem</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>2e9ba1f4c15943f099d53f4595fee9db</uuid>
+                    <name>Modulation Tx actual</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.3.9.0]</snmp_oid>
+                    <key>SAF-INTEGRAW-MIB_integraWmodemTxModulation</key>
+                    <history>12h</history>
+                    <units>!QAM</units>
+                    <description>Current (actual) Tx Modulation</description>
+                    <preprocessing>
+                        <step>
+                            <type>REGEX</type>
+                            <parameters>
+                                <parameter>(\d+)</parameter>
+                                <parameter>\1</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>2 Modem</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>fdbacc4dc1104e4196b1aca313473bc6</uuid>
+                    <name>PLL status</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.2.11.0]</snmp_oid>
+                    <key>SAF-INTEGRAW-MIB_integraWradioPLL</key>
+                    <history>90d</history>
+                    <trends>0</trends>
+                    <description>PLL state of local-oscillator generator</description>
+                    <valuemap>
+                        <name>SAF Radio PLL</name>
+                    </valuemap>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>1 Overall Display</value>
+                        </tag>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>3 Radio</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>8c3465d6679d4197be3f18bec71e29e8</uuid>
+                            <expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWradioPLL)=1</expression>
+                            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                            <recovery_expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWradioPLL)=2</recovery_expression>
+                            <name>PLL status ERROR</name>
+                            <priority>DISASTER</priority>
+                            <description>PLL is in error state.</description>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>a9d002f7c04547c09703d53e53ff36f1</uuid>
+                    <name>Frequency Rx</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.2.7.0]</snmp_oid>
+                    <key>SAF-INTEGRAW-MIB_integraWradioRxFrequency</key>
+                    <history>90d</history>
+                    <trends>0</trends>
+                    <units>!MHz</units>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <parameters>
+                                <parameter>0.001</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>3 Radio</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>2e521013f7644ecd97a5619609bd6820</uuid>
+                    <name>Rx level</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.2.3.0]</snmp_oid>
+                    <key>SAF-INTEGRAW-MIB_integraWradioRxLevel</key>
+                    <history>90d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>dBm</units>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>3 Radio</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>04c72f5b27964069be5613eb7e4275ae</uuid>
+                            <expression>between(last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWradioRxLevel),{$RXLEVMIN},{$RXLEVMAX})=0</expression>
+                            <name>Rx level out of range</name>
+                            <priority>HIGH</priority>
+                            <description>Rx level out of range.</description>
+                            <manual_close>YES</manual_close>
+                            <dependencies>
+                                <dependency>
+                                    <name>Modem Acquire Status Failed</name>
+                                    <expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWmodemAcquireStatus)=3</expression>
+                                    <recovery_expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWmodemAcquireStatus)=2</recovery_expression>
+                                </dependency>
+                                <dependency>
+                                    <name>PLL status ERROR</name>
+                                    <expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWradioPLL)=1</expression>
+                                    <recovery_expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWradioPLL)=2</recovery_expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>9d8bfae0075f4a54be4ee8bbb17b677b</uuid>
+                    <name>Rx Level state</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.2.12.0]</snmp_oid>
+                    <key>SAF-INTEGRAW-MIB_integraWradioRxLevelState</key>
+                    <history>90d</history>
+                    <trends>0</trends>
+                    <description>Received signal level state</description>
+                    <valuemap>
+                        <name>SAF radio Rx level state</name>
+                    </valuemap>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>3 Radio</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>40fbb5acea5d40b4a4cc43356a2309a1</uuid>
+                            <expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWradioRxLevelState)&lt;&gt;1</expression>
+                            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                            <recovery_expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWradioRxLevelState)=1</recovery_expression>
+                            <name>Rx level status alarm</name>
+                            <priority>HIGH</priority>
+                            <description>Rx level out of range.</description>
+                            <manual_close>YES</manual_close>
+                            <dependencies>
+                                <dependency>
+                                    <name>Modem Acquire Status Failed</name>
+                                    <expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWmodemAcquireStatus)=3</expression>
+                                    <recovery_expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWmodemAcquireStatus)=2</recovery_expression>
+                                </dependency>
+                                <dependency>
+                                    <name>PLL status ERROR</name>
+                                    <expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWradioPLL)=1</expression>
+                                    <recovery_expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWradioPLL)=2</recovery_expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>3ffd9859d4264388a292b9ec2c9ce281</uuid>
+                    <name>Radio side</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.2.4.0]</snmp_oid>
+                    <key>SAF-INTEGRAW-MIB_integraWradioSide</key>
+                    <history>90d</history>
+                    <trends>0</trends>
+                    <description>Radio side:Low/High</description>
+                    <valuemap>
+                        <name>SAF radio side</name>
+                    </valuemap>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>1 Overall Display</value>
+                        </tag>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>3 Radio</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>76d24cc04a7a4a378ed0fcb452304af6</uuid>
+                    <name>Radio temperature</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.2.8.0]</snmp_oid>
+                    <key>SAF-INTEGRAW-MIB_integraWradioTemperature</key>
+                    <history>10d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>Cel</units>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <parameters>
+                                <parameter>0.1</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>7 System</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>662dc705b45540a0af2716e99fc5676a</uuid>
+                            <expression>between(last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWradioTemperature),{$TEMPMIN},{$TEMPMAX80})=0</expression>
+                            <name>Radio temperature out of range!</name>
+                            <priority>WARNING</priority>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                        <trigger>
+                            <uuid>75162ce318fb4eeaa9ed92b9613fbe0b</uuid>
+                            <expression>between(last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWradioTemperature),{$TEMPMIN},{$TEMPMAX100})=0</expression>
+                            <name>System CPU temperature out of range</name>
+                            <priority>WARNING</priority>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>c342d66ff18d4cffa5f4a6d919547e8d</uuid>
+                    <name>Frequency Tx</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.2.2.0]</snmp_oid>
+                    <key>SAF-INTEGRAW-MIB_integraWradioTxFrequency</key>
+                    <history>90d</history>
+                    <trends>0</trends>
+                    <units>!MHz</units>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <parameters>
+                                <parameter>0.001</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>3 Radio</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>9c17183d770f4f2186c5944e8d5d82e7</uuid>
+                    <name>Tx power</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.2.1.0]</snmp_oid>
+                    <key>SAF-INTEGRAW-MIB_integraWradioTxPower</key>
+                    <history>90d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>dBm</units>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>3 Radio</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>8c866f28f8ff4ad2a36423d91b95586a</uuid>
+                    <name>System temperature</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.4.8.0]</snmp_oid>
+                    <key>SAF-INTEGRAW-MIB_integraWsysBoardTemperature</key>
+                    <history>10d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>Cel</units>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <parameters>
+                                <parameter>0.1</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>7 System</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>cc5120acf2084732a2bc99a775d3d6c0</uuid>
+                            <expression>between(last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWsysBoardTemperature),{$TEMPMIN},{$TEMPMAX100})=0</expression>
+                            <name>System temperature out of range</name>
+                            <priority>WARNING</priority>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>9c7570c42ded4d6fa03938dd7affbc47</uuid>
+                    <name>CPU idle</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.4.10.0]</snmp_oid>
+                    <key>SAF-INTEGRAW-MIB_integraWsysCPUidle</key>
+                    <history>10d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <parameters>
+                                <parameter>0.1</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>7 System</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>cee90e229249468b807fce9d463fd741</uuid>
+                    <name>CPU load</name>
+                    <type>CALCULATED</type>
+                    <key>SAF-INTEGRAW-MIB_integraWsysCPUload</key>
+                    <history>10d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <params>100-last(//SAF-INTEGRAW-MIB_integraWsysCPUidle)</params>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>7 System</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>c6e0f8fef0a94f7a86af56088891e678</uuid>
+                    <name>CPU temperature: $1</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.4.2.0]</snmp_oid>
+                    <key>SAF-INTEGRAW-MIB_integraWsysCPUtemperature</key>
+                    <history>10d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>Cel</units>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <parameters>
+                                <parameter>0.1</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>7 System</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>7c4523a35bc944e790d5f014f37a2651</uuid>
+                    <name>System Memory free</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.4.9.0]</snmp_oid>
+                    <key>SAF-INTEGRAW-MIB_integraWsysFreeMemory</key>
+                    <history>10d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <parameters>
+                                <parameter>0.1</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>7 System</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>c367b16a3fdb440aad0c06d31f0eb8ca</uuid>
+                    <name>License remaining time: $1</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.4.3.0]</snmp_oid>
+                    <key>SAF-INTEGRAW-MIB_integraWsysLicenseExpire</key>
+                    <history>10d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>s</units>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>5 Status</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>600274b530f640618510569e62b15522</uuid>
+                    <name>License status: $1</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.4.4.0]</snmp_oid>
+                    <key>SAF-INTEGRAW-MIB_integraWsysLicenseGenStatus</key>
+                    <history>10d</history>
+                    <value_type>FLOAT</value_type>
+                    <valuemap>
+                        <name>SAF Integra W license status</name>
+                    </valuemap>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>1 Overall Display</value>
+                        </tag>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>5 Status</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>0f93f667337349179fc9eed9bff064c9</uuid>
+                            <expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWsysLicenseGenStatus)=4</expression>
+                            <name>License unlimited</name>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>f1f2ad9d0b564891868a43b17f9acb2b</uuid>
+                    <name>PSU current</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.4.6.0]</snmp_oid>
+                    <key>SAF-INTEGRAW-MIB_integraWsysPSUcurrent</key>
+                    <history>10d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>A</units>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <parameters>
+                                <parameter>0.001</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>7 System</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>8e77a3f03c2343609508ed1f8da82459</uuid>
+                            <expression>between(last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWsysPSUcurrent),{$PSUCURRMIN},{$PSUCURRMAX})=0</expression>
+                            <name>PSU current alarm</name>
+                            <priority>WARNING</priority>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>31fbf93e3f614937b1e3814024124b46</uuid>
+                    <name>PSU power</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.4.7.0]</snmp_oid>
+                    <key>SAF-INTEGRAW-MIB_integraWsysPSUpower</key>
+                    <history>10d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>W</units>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <parameters>
+                                <parameter>0.001</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>7 System</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>79fa7d4e6c474837a8a718961c773251</uuid>
+                            <expression>between(last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWsysPSUpower),{$PSUPOWMIN},{$PSUPOWMAX})=0</expression>
+                            <name>PSU power alarm</name>
+                            <priority>WARNING</priority>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>42aa2e535fe145fb98057072ad227b11</uuid>
+                    <name>PSU voltage</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.4.1.7571.100.1.1.7.2.4.5.0]</snmp_oid>
+                    <key>SAF-INTEGRAW-MIB_integraWsysPSUvoltage</key>
+                    <history>10d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>V</units>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <parameters>
+                                <parameter>0.001</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>7 System</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>8257a9a2e6c541b7a47832a0293e292d</uuid>
+                    <name>System Memory used</name>
+                    <type>CALCULATED</type>
+                    <key>SAF-INTEGRAW-MIB_integraWsysUsedMemory</key>
+                    <history>10d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <params>100-last(//SAF-INTEGRAW-MIB_integraWsysFreeMemory)</params>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>7 System</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>7760692b66ac4469bb6f740166614037</uuid>
+                    <name>Location name</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.2.1.1.6.0]</snmp_oid>
+                    <key>sysLocation</key>
+                    <history>1d</history>
+                    <value_type>TEXT</value_type>
+                    <trends>0</trends>
+                    <inventory_link>LOCATION</inventory_link>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>1 Overall Display</value>
+                        </tag>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>7 System</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>f6954819fcaa4e87b6792142ea1fd73b</uuid>
+                    <name>System name</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.2.1.1.5.0]</snmp_oid>
+                    <key>sysName</key>
+                    <history>1d</history>
+                    <value_type>TEXT</value_type>
+                    <trends>0</trends>
+                    <inventory_link>NAME</inventory_link>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>1 Overall Display</value>
+                        </tag>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>7 System</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>03902dbdd30447828c76c6fa27defebc</uuid>
+                    <name>System uptime</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>get[ .1.3.6.1.2.1.1.3.0]</snmp_oid>
+                    <key>sysUpTime</key>
+                    <delay>5m</delay>
+                    <history>10d</history>
+                    <units>s</units>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <parameters>
+                                <parameter>0.01</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>1 Overall Display</value>
+                        </tag>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>7 System</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>d4d6713e611d4f21a6e46446b9b14edd</uuid>
+                            <expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/sysUpTime)&lt;15m</expression>
+                            <name>Radio was restarted</name>
+                            <priority>HIGH</priority>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>f8df85d995b841dea30ac10c44a58a5b</uuid>
+                    <name>SNMP agent availability</name>
+                    <type>INTERNAL</type>
+                    <key>zabbix[host,snmp,available]</key>
+                    <history>7d</history>
+                    <valuemap>
+                        <name>zabbix.host.available</name>
+                    </valuemap>
+                    <tags>
+                        <tag>
+                            <tag>Component</tag>
+                            <value>5 Status</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>d375c90866c6468b930d2dc19fd45183</uuid>
+                            <expression>max(/SAF BASIC Integra-W template V30 for Zabbix 7.0/zabbix[host,snmp,available],{$SNMP.TIMEOUT})=0</expression>
+                            <name>No SNMP data collection</name>
+                            <priority>DISASTER</priority>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+            </items>
+            <tags>
+                <tag>
+                    <tag>Equipment</tag>
+                    <value>Integra-W</value>
+                </tag>
+                <tag>
+                    <tag>Vendor</tag>
+                    <value>SAF Tehnika</value>
+                </tag>
+            </tags>
+            <macros>
+                <macro>
+                    <macro>{$CARROFFSETMAX}</macro>
+                    <value>250</value>
+                </macro>
+                <macro>
+                    <macro>{$CARROFFSETMIN}</macro>
+                    <value>-250</value>
+                </macro>
+                <macro>
+                    <macro>{$FECLOADMAX}</macro>
+                    <value>50</value>
+                </macro>
+                <macro>
+                    <macro>{$ICMP_LOSS_WARN}</macro>
+                    <value>20</value>
+                </macro>
+                <macro>
+                    <macro>{$ICMP_RESPONSE_TIME_WARN}</macro>
+                    <value>.15</value>
+                </macro>
+                <macro>
+                    <macro>{$LICREMTIME}</macro>
+                    <value>15d</value>
+                </macro>
+                <macro>
+                    <macro>{$PSUCURRMAX}</macro>
+                    <value>2.6</value>
+                    <description>ampers</description>
+                </macro>
+                <macro>
+                    <macro>{$PSUCURRMIN}</macro>
+                    <value>.1</value>
+                    <description>ampers</description>
+                </macro>
+                <macro>
+                    <macro>{$PSUPOWMAX}</macro>
+                    <value>40</value>
+                    <description>watts</description>
+                </macro>
+                <macro>
+                    <macro>{$PSUPOWMIN}</macro>
+                    <value>10</value>
+                    <description>watts</description>
+                </macro>
+                <macro>
+                    <macro>{$PSUVOLTMAX}</macro>
+                    <value>58</value>
+                </macro>
+                <macro>
+                    <macro>{$PSUVOLTMIN}</macro>
+                    <value>36</value>
+                </macro>
+                <macro>
+                    <macro>{$RADIO}</macro>
+                    <value>.1.3.6.1.4.1.7571.100.1.1.7.2</value>
+                </macro>
+                <macro>
+                    <macro>{$RXAGCGAINMAX}</macro>
+                    <value>3</value>
+                </macro>
+                <macro>
+                    <macro>{$RXAGCGAINMIN}</macro>
+                    <value>.1</value>
+                </macro>
+                <macro>
+                    <macro>{$RXLEVMAX}</macro>
+                    <value>-35</value>
+                </macro>
+                <macro>
+                    <macro>{$RXLEVMIN}</macro>
+                    <value>-75</value>
+                </macro>
+                <macro>
+                    <macro>{$SIGQUAL}</macro>
+                    <value>47</value>
+                </macro>
+                <macro>
+                    <macro>{$SNMP.TIMEOUT}</macro>
+                    <value>3m</value>
+                </macro>
+                <macro>
+                    <macro>{$SNMP_COMMUNITY}</macro>
+                    <value>saf-public</value>
+                </macro>
+                <macro>
+                    <macro>{$TEMP0}</macro>
+                    <value>0</value>
+                </macro>
+                <macro>
+                    <macro>{$TEMPMAX80}</macro>
+                    <value>80</value>
+                    <description>celsius</description>
+                </macro>
+                <macro>
+                    <macro>{$TEMPMAX100}</macro>
+                    <value>100</value>
+                </macro>
+                <macro>
+                    <macro>{$TEMPMAX115}</macro>
+                    <value>115</value>
+                    <description>celsius</description>
+                </macro>
+                <macro>
+                    <macro>{$TEMPMIN}</macro>
+                    <value>-40</value>
+                </macro>
+                <macro>
+                    <macro>{$XPDESTMAX}</macro>
+                    <value>45</value>
+                </macro>
+                <macro>
+                    <macro>{$XPDESTMIN}</macro>
+                    <value>20</value>
+                </macro>
+            </macros>
+            <valuemaps>
+                <valuemap>
+                    <uuid>f125a3506ce24788b61a56733b5ca47a</uuid>
+                    <name>SAF 3 states</name>
+                    <mappings>
+                        <mapping>
+                            <value>1</value>
+                            <newvalue>Enabled</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>2</value>
+                            <newvalue>Disabled</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>3</value>
+                            <newvalue>Unknown</newvalue>
+                        </mapping>
+                    </mappings>
+                </valuemap>
+                <valuemap>
+                    <uuid>4436c57620134a6f862cc8f079af1d00</uuid>
+                    <name>SAF ACM engine status</name>
+                    <mappings>
+                        <mapping>
+                            <value>1</value>
+                            <newvalue>enabled</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>2</value>
+                            <newvalue>disabled</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>3</value>
+                            <newvalue>error</newvalue>
+                        </mapping>
+                    </mappings>
+                </valuemap>
+                <valuemap>
+                    <uuid>90570cb5a11d4bbcbdc0f0ee50c8c901</uuid>
+                    <name>SAF ATPC 3 states</name>
+                    <mappings>
+                        <mapping>
+                            <value>1</value>
+                            <newvalue>off</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>2</value>
+                            <newvalue>on</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>3</value>
+                            <newvalue>unknown</newvalue>
+                        </mapping>
+                    </mappings>
+                </valuemap>
+                <valuemap>
+                    <uuid>5ba1bbf906b0423ab0abc051dfc4eeb3</uuid>
+                    <name>SAF Ethernet port duplex</name>
+                    <mappings>
+                        <mapping>
+                            <value>1</value>
+                            <newvalue>Full</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>2</value>
+                            <newvalue>Half</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>3</value>
+                            <newvalue>Unknown</newvalue>
+                        </mapping>
+                    </mappings>
+                </valuemap>
+                <valuemap>
+                    <uuid>76f35aef325e4ec9a36d314b0792564d</uuid>
+                    <name>SAF Integra W license status</name>
+                    <mappings>
+                        <mapping>
+                            <value>1</value>
+                            <newvalue>Ok</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>2</value>
+                            <newvalue>Expired</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>3</value>
+                            <newvalue>Unknown</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>4</value>
+                            <newvalue>Unlimited</newvalue>
+                        </mapping>
+                    </mappings>
+                </valuemap>
+                <valuemap>
+                    <uuid>3d61d558ac714f93b47e8961ee5eb374</uuid>
+                    <name>SAF Integra W modem lock</name>
+                    <mappings>
+                        <mapping>
+                            <value>1</value>
+                            <newvalue>locked</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>2</value>
+                            <newvalue>unlocked</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>3</value>
+                            <newvalue>unknown</newvalue>
+                        </mapping>
+                    </mappings>
+                </valuemap>
+                <valuemap>
+                    <uuid>d7ff8c366543417a835c5d576070d368</uuid>
+                    <name>SAF Modem acquire staus</name>
+                    <mappings>
+                        <mapping>
+                            <value>1</value>
+                            <newvalue>acquireInProgress</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>2</value>
+                            <newvalue>acquireLocked</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>3</value>
+                            <newvalue>acquireFailed</newvalue>
+                        </mapping>
+                    </mappings>
+                </valuemap>
+                <valuemap>
+                    <uuid>a09fd98c6c1742a5bc9fdbf806c920d9</uuid>
+                    <name>SAF Radio PLL</name>
+                    <mappings>
+                        <mapping>
+                            <value>1</value>
+                            <newvalue>error</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>2</value>
+                            <newvalue>ok</newvalue>
+                        </mapping>
+                    </mappings>
+                </valuemap>
+                <valuemap>
+                    <uuid>5faac4be1c2942e38caca111764c541d</uuid>
+                    <name>SAF radio Rx level state</name>
+                    <mappings>
+                        <mapping>
+                            <value>1</value>
+                            <newvalue>ok</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>2</value>
+                            <newvalue>low</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>3</value>
+                            <newvalue>high</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>4</value>
+                            <newvalue>error</newvalue>
+                        </mapping>
+                    </mappings>
+                </valuemap>
+                <valuemap>
+                    <uuid>7b52a079e83f4a35bc5cd2fba2f8a523</uuid>
+                    <name>SAF radio side</name>
+                    <mappings>
+                        <mapping>
+                            <value>1</value>
+                            <newvalue>High</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>2</value>
+                            <newvalue>Low</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>3</value>
+                            <newvalue>Error</newvalue>
+                        </mapping>
+                    </mappings>
+                </valuemap>
+                <valuemap>
+                    <uuid>7526f7e394ae4abaa98a0a313bdb799b</uuid>
+                    <name>SAF radio Tx Mute</name>
+                    <mappings>
+                        <mapping>
+                            <value>1</value>
+                            <newvalue>Enabled</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>2</value>
+                            <newvalue>Disabled</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>3</value>
+                            <newvalue>Error</newvalue>
+                        </mapping>
+                    </mappings>
+                </valuemap>
+                <valuemap>
+                    <uuid>01901a8d784d482186e2b8bb3f89d4e1</uuid>
+                    <name>SAF_ports Operational status</name>
+                    <mappings>
+                        <mapping>
+                            <value>1</value>
+                            <newvalue>Up</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>2</value>
+                            <newvalue>Down</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>3</value>
+                            <newvalue>Unknown</newvalue>
+                        </mapping>
+                    </mappings>
+                </valuemap>
+                <valuemap>
+                    <uuid>c2add82eaf14496aa476b2107b0a3965</uuid>
+                    <name>Service state</name>
+                    <mappings>
+                        <mapping>
+                            <value>0</value>
+                            <newvalue>Unavailable</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>1</value>
+                            <newvalue>Available</newvalue>
+                        </mapping>
+                    </mappings>
+                </valuemap>
+                <valuemap>
+                    <uuid>dd31bcc5d8764558a2305b9f4b17f7bb</uuid>
+                    <name>zabbix.host.available</name>
+                    <mappings>
+                        <mapping>
+                            <value>0</value>
+                            <newvalue>Not Available</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>1</value>
+                            <newvalue>Available</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>2</value>
+                            <newvalue>Unknown</newvalue>
+                        </mapping>
+                    </mappings>
+                </valuemap>
+            </valuemaps>
+        </template>
+    </templates>
+    <triggers>
+        <trigger>
+            <uuid>041267b712624d638cb089316310f664</uuid>
+            <expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWsysLicenseExpire)&lt;=1209600 or last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWsysLicenseGenStatus)=2</expression>
+            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+            <recovery_expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWsysLicenseExpire)&gt;1209600 or last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWsysLicenseGenStatus)=1</recovery_expression>
+            <name>License will expire or expired</name>
+            <priority>WARNING</priority>
+            <manual_close>YES</manual_close>
+            <dependencies>
+                <dependency>
+                    <name>License unlimited</name>
+                    <expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWsysLicenseGenStatus)=4</expression>
+                </dependency>
+            </dependencies>
+        </trigger>
+        <trigger>
+            <uuid>bd7d992667cd4fd6a6c26283ab751d86</uuid>
+            <expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWmodemRxModulation)&lt;&gt;last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWmodemModulation) or last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWmodemTxModulation)&lt;&gt;last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWmodemModulation)</expression>
+            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+            <recovery_expression>last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWmodemRxModulation)=last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWmodemModulation) and last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWmodemTxModulation)=last(/SAF BASIC Integra-W template V30 for Zabbix 7.0/SAF-INTEGRAW-MIB_integraWmodemModulation)</recovery_expression>
+            <name>Link modulation drop</name>
+            <priority>WARNING</priority>
+            <manual_close>YES</manual_close>
+        </trigger>
+    </triggers>
+    <graphs>
+        <graph>
+            <uuid>7f2b799591e74556a44e4fb56fbb8514</uuid>
+            <name>CPU, Radio and System temperatures</name>
+            <show_triggers>NO</show_triggers>
+            <graph_items>
+                <graph_item>
+                    <color>BFFF00</color>
+                    <item>
+                        <host>SAF BASIC Integra-W template V30 for Zabbix 7.0</host>
+                        <key>SAF-INTEGRAW-MIB_integraWsysCPUtemperature</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>0277BD</color>
+                    <item>
+                        <host>SAF BASIC Integra-W template V30 for Zabbix 7.0</host>
+                        <key>SAF-INTEGRAW-MIB_integraWsysBoardTemperature</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>D84315</color>
+                    <item>
+                        <host>SAF BASIC Integra-W template V30 for Zabbix 7.0</host>
+                        <key>SAF-INTEGRAW-MIB_integraWradioTemperature</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>5310765b18f646ff886a257b2fffd50c</uuid>
+            <name>ICMP response time</name>
+            <show_triggers>NO</show_triggers>
+            <graph_items>
+                <graph_item>
+                    <drawtype>FILLED_REGION</drawtype>
+                    <color>4CAF50</color>
+                    <item>
+                        <host>SAF BASIC Integra-W template V30 for Zabbix 7.0</host>
+                        <key>icmppingsec</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>d903b4851e3641af980ca4c5e7dfd2b3</uuid>
+            <name>Integra ports ingress/egress traffic</name>
+            <graph_items>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>F63100</color>
+                    <item>
+                        <host>SAF BASIC Integra-W template V30 for Zabbix 7.0</host>
+                        <key>integraWrxBytesLAN</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>3</sortorder>
+                    <color>2774A4</color>
+                    <item>
+                        <host>SAF BASIC Integra-W template V30 for Zabbix 7.0</host>
+                        <key>integraWrxBytesMNG</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>5</sortorder>
+                    <color>FC6EA3</color>
+                    <item>
+                        <host>SAF BASIC Integra-W template V30 for Zabbix 7.0</host>
+                        <key>integraWtxBytesLAN</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>6</sortorder>
+                    <color>6C59DC</color>
+                    <item>
+                        <host>SAF BASIC Integra-W template V30 for Zabbix 7.0</host>
+                        <key>integraWtxBytesMNG</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>2621ef8d513045d49af6acb1d4de25d0</uuid>
+            <name>Memory usage</name>
+            <width>300</width>
+            <show_triggers>NO</show_triggers>
+            <graph_items>
+                <graph_item>
+                    <color>F63100</color>
+                    <calc_fnc>ALL</calc_fnc>
+                    <item>
+                        <host>SAF BASIC Integra-W template V30 for Zabbix 7.0</host>
+                        <key>SAF-INTEGRAW-MIB_integraWsysUsedMemory</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>4000FF</color>
+                    <yaxisside>RIGHT</yaxisside>
+                    <calc_fnc>ALL</calc_fnc>
+                    <item>
+                        <host>SAF BASIC Integra-W template V30 for Zabbix 7.0</host>
+                        <key>SAF-INTEGRAW-MIB_integraWsysFreeMemory</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>b5c0ded0aeac44e99788cb5dfbc5036f</uuid>
+            <name>PSU input</name>
+            <show_triggers>NO</show_triggers>
+            <graph_items>
+                <graph_item>
+                    <color>3F51B5</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>SAF BASIC Integra-W template V30 for Zabbix 7.0</host>
+                        <key>SAF-INTEGRAW-MIB_integraWsysPSUvoltage</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>8E24AA</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>SAF BASIC Integra-W template V30 for Zabbix 7.0</host>
+                        <key>SAF-INTEGRAW-MIB_integraWsysPSUpower</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>AD1457</color>
+                    <yaxisside>RIGHT</yaxisside>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>SAF BASIC Integra-W template V30 for Zabbix 7.0</host>
+                        <key>SAF-INTEGRAW-MIB_integraWsysPSUcurrent</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>94dc70a8449240f7b4c8d52c44f11349</uuid>
+            <name>Rx level and signal quality</name>
+            <show_triggers>NO</show_triggers>
+            <graph_items>
+                <graph_item>
+                    <color>1A7C11</color>
+                    <calc_fnc>ALL</calc_fnc>
+                    <item>
+                        <host>SAF BASIC Integra-W template V30 for Zabbix 7.0</host>
+                        <key>SAF-INTEGRAW-MIB_integraWradioRxLevel</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>F63100</color>
+                    <yaxisside>RIGHT</yaxisside>
+                    <item>
+                        <host>SAF BASIC Integra-W template V30 for Zabbix 7.0</host>
+                        <key>SAF-INTEGRAW-MIB_integraWmodemRadialMse</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>a5a5aac44770467f80390d005cb9dbb3</uuid>
+            <name>System load</name>
+            <show_triggers>NO</show_triggers>
+            <ymax_type_1>FIXED</ymax_type_1>
+            <graph_items>
+                <graph_item>
+                    <color>00FFFF</color>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>SAF BASIC Integra-W template V30 for Zabbix 7.0</host>
+                        <key>SAF-INTEGRAW-MIB_integraWsysCPUload</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>80FF00</color>
+                    <yaxisside>RIGHT</yaxisside>
+                    <calc_fnc>MAX</calc_fnc>
+                    <item>
+                        <host>SAF BASIC Integra-W template V30 for Zabbix 7.0</host>
+                        <key>SAF-INTEGRAW-MIB_integraWsysUsedMemory</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+    </graphs>
+</zabbix_export>
