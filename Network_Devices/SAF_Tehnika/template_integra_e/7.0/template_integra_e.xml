@@ -14,8 +14,8 @@
     <templates>
         <template>
             <uuid>b3334583eb8845e190199b8f7c51251e</uuid>
-            <template>SAF BASIC Integra-E_E2 template V30 for Zabbix 7.0</template>
-            <name>SAF BASIC Integra-E_E2 template V30 for Zabbix 7.0</name>
+            <template>SAF BASIC Integra-E_E2 template V30 for Zabbix 7.0 </template>
+            <name>SAF BASIC Integra-E_E2 template V30 for Zabbix 7.0 </name>
             <groups>
                 <group>
                     <name>Integra-E/E2</name>

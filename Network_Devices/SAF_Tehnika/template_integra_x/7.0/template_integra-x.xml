@@ -14,8 +14,8 @@
     <templates>
         <template>
             <uuid>280d69e11bd048248936d05d929521d5</uuid>
-            <template>SAF BASIC Integra-X template V30 for Zabbix 7.0</template>
-            <name>SAF BASIC Integra-X template V30 for Zabbix 7.0</name>
+            <template>SAF BASIC Integra-X template V30 for Zabbix 7.0 </template>
+            <name>SAF BASIC Integra-X template V30 for Zabbix 7.0 </name>
             <description>Contacts: saftehnika.com,  techsupport@saftehnika.com.
 Template for SAF radio Integra-X.</description>
             <groups>
