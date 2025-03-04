@@ -123,7 +123,7 @@ zabbix_export:
         - uuid: 619e1d3052f746a8a431230acc77734f
           name: 'WANHP dropped bits'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.5.2.1.57.5]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.5.2.1.57.5]'
           key: integraXifAllCoSQdroppedBytes_WANHP
           history: 90d
           units: b
@@ -138,7 +138,7 @@ zabbix_export:
         - uuid: ccd6e33e91654a36839e9fcce39dd188
           name: 'WANLP dropped bits'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.5.2.1.57.4]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.5.2.1.57.4]'
           key: integraXifAllCoSQdroppedBytes_WANLP
           history: 90d
           units: b
@@ -187,7 +187,7 @@ zabbix_export:
         - uuid: 2eb8ebeea263475986bdc403aafab8cb
           name: 'WANHP egress traffic'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.5.2.1.52.5]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.5.2.1.52.5]'
           key: integraXifEgressBPS_WANHP
           history: 90d
           value_type: FLOAT
@@ -203,7 +203,7 @@ zabbix_export:
         - uuid: 331d1898d5ee4e80ac349883a8b00086
           name: 'Egress traffic WANLP'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.5.2.1.52.4]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.5.2.1.52.4]'
           key: integraXifEgressBPS_WANLP
           history: 90d
           value_type: FLOAT
@@ -219,7 +219,7 @@ zabbix_export:
         - uuid: 60cfafd6d7154963aba8c1b7f01d871a
           name: 'WANHP Egress traffic packets per second'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.5.2.1.53.5]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.5.2.1.53.5]'
           key: integraXifEgressPPS_WANHP
           history: 90d
           value_type: FLOAT
@@ -231,7 +231,7 @@ zabbix_export:
         - uuid: ab3ff3a7d3ea4c4aaddc8ddd354c5e33
           name: 'WANLP Egress traffic packets per second'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.5.2.1.53.4]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.5.2.1.53.4]'
           key: integraXifEgressPPS_WANLP
           history: 90d
           value_type: FLOAT
@@ -243,7 +243,7 @@ zabbix_export:
         - uuid: 4e51705bdc80436b8de6befe04ff2b06
           name: 'WANHP ingress traffic'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.5.2.1.50.5]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.5.2.1.50.5]'
           key: integraXifIngressBPS_WANHP
           history: 90d
           value_type: FLOAT
@@ -259,7 +259,7 @@ zabbix_export:
         - uuid: 9fb2ca63f0f64ecf931985830603532e
           name: 'Ingress traffic WANLP'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.5.2.1.50.4]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.5.2.1.50.4]'
           key: integraXifIngressBPS_WANLP
           history: 90d
           value_type: FLOAT
@@ -275,7 +275,7 @@ zabbix_export:
         - uuid: a2fcf79f9a5d4602bae116ff168beff8
           name: 'WANHP Ingress traffic packets per second'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.5.2.1.51.5]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.5.2.1.51.5]'
           key: integraXifIngressPPS_WANHP
           history: 90d
           value_type: FLOAT
@@ -287,7 +287,7 @@ zabbix_export:
         - uuid: 4b5b8063a6a94f1badb83bd209f5202a
           name: 'WANLP Ingress traffic packets per second'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.5.2.1.51.4]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.5.2.1.51.4]'
           key: integraXifIngressPPS_WANLP
           history: 90d
           value_type: FLOAT
@@ -299,7 +299,7 @@ zabbix_export:
         - uuid: f984a790734c4898899ba446fc8653f7
           name: 'LSP port administrative state'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.5.3.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.5.3.0]'
           key: integraXifLspPortAdminState
           delay: 30m
           history: 10d
@@ -313,7 +313,7 @@ zabbix_export:
         - uuid: 1495aea4f6f641e68e99a1dcebe6d43e
           name: 'LSP port blocked by LSP advanced'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.5.6.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.5.6.0]'
           key: integraXifLspPortDownBlockedByLspAdvanced
           delay: 30m
           history: 10d
@@ -325,7 +325,7 @@ zabbix_export:
         - uuid: 8920c682b8c04e70ae968e43621bf427
           name: 'LSP ports'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.5.4.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.5.4.0]'
           key: integraXifLspPortList
           delay: 30m
           history: 10d
@@ -337,7 +337,7 @@ zabbix_export:
         - uuid: 1beb45f975a6412885efc0cbf76a856f
           name: 'LSP port status'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.5.5.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.5.5.0]'
           key: integraXifLspPortStatus
           delay: 30m
           history: 10d
@@ -351,7 +351,7 @@ zabbix_export:
         - uuid: 5bb0f7ba1bfc421f876564818902b814
           name: 'LAN1 Administrative Status'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.5.1.1.7.1]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.5.1.1.7.1]'
           key: integraXifPortAdminStatus_lan1
           history: 90d
           valuemap:
@@ -372,7 +372,7 @@ zabbix_export:
         - uuid: a570d683e5bd4692a4fe09f5ce099689
           name: 'LAN2 Administrative Status'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.5.1.1.7.2]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.5.1.1.7.2]'
           key: integraXifPortAdminStatus_lan2
           history: 90d
           valuemap:
@@ -393,7 +393,7 @@ zabbix_export:
         - uuid: 0910a407b67a423baa84df8889d3cb04
           name: 'LAN3 Administrative Status'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.5.1.1.7.3]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.5.1.1.7.3]'
           key: integraXifPortAdminStatus_lan3
           history: 90d
           valuemap:
@@ -414,7 +414,7 @@ zabbix_export:
         - uuid: 03bd791f531449bfa5e245221bcd66f8
           name: 'LAN1 Port Duplex'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.5.1.1.11.1]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.5.1.1.11.1]'
           key: integraXifPortDuplex_LAN1
           history: 90d
           trends: 30d
@@ -426,7 +426,7 @@ zabbix_export:
         - uuid: bba6c058954d4008969df86369577133
           name: 'LAN2 Port Duplex'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.5.1.1.11.2]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.5.1.1.11.2]'
           key: integraXifPortDuplex_LAN2
           history: 90d
           trends: 30d
@@ -438,7 +438,7 @@ zabbix_export:
         - uuid: bb8c2547de524fefa24a5d87b230c7e0
           name: 'LAN3 Port Duplex'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.5.1.1.11.3]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.5.1.1.11.3]'
           key: integraXifPortDuplex_LAN3
           history: 90d
           trends: 30d
@@ -450,7 +450,7 @@ zabbix_export:
         - uuid: 8cace5939e3f49d5a16078545b18fe74
           name: 'LAN1 Port Speed'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.5.1.1.5.1]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.5.1.1.5.1]'
           key: integraXifPortHighSpeed_LAN1
           history: 90d
           trends: 30d
@@ -467,7 +467,7 @@ zabbix_export:
         - uuid: 722c7974af3a466ea7c2394434bd60a0
           name: 'LAN2 Port Speed'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.5.1.1.5.2]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.5.1.1.5.2]'
           key: integraXifPortHighSpeed_LAN2
           history: 90d
           value_type: FLOAT
@@ -485,7 +485,7 @@ zabbix_export:
         - uuid: 5ac24f96662648d78220cebca32853de
           name: 'LAN3 Port Speed'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.5.1.1.5.3]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.5.1.1.5.3]'
           key: integraXifPortHighSpeed_LAN3
           history: 90d
           value_type: FLOAT
@@ -503,7 +503,7 @@ zabbix_export:
         - uuid: 4353d668554a49a38f16bf3df5488c68
           name: 'LAN1 Operational Status'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.5.1.1.8.1]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.5.1.1.8.1]'
           key: integraXifPortOperStatus_LAN1
           history: 90d
           valuemap:
@@ -523,7 +523,7 @@ zabbix_export:
         - uuid: ff9f05865edc40f7ad67d7c20962b64c
           name: 'LAN2 Operational Status'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.5.1.1.8.2]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.5.1.1.8.2]'
           key: integraXifPortOperStatus_LAN2
           history: 90d
           valuemap:
@@ -545,7 +545,7 @@ zabbix_export:
         - uuid: 64242f5a90244da4b82cc21ce92f9afc
           name: 'LAN3 Operational Status'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.5.1.1.8.3]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.5.1.1.8.3]'
           key: integraXifPortOperStatus_LAN3
           history: 90d
           valuemap:
@@ -567,7 +567,7 @@ zabbix_export:
         - uuid: 7054b5fbd6a4497e88458ed187605074
           name: 'Modem A ACM engine status'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.1.11.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.1.11.0]'
           key: integraXmodemAacmEngine
           history: 90d
           trends: 30d
@@ -582,7 +582,7 @@ zabbix_export:
         - uuid: 8f6458d246c94ce19bb0478f01075bc1
           name: 'Modem A acquire last status details'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.1.5.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.1.5.0]'
           key: integraXmodemAacquireLastStatusDetails
           history: 90d
           valuemap:
@@ -607,7 +607,7 @@ zabbix_export:
         - uuid: 70fe573ffcbe4f7e921165b2fbe72abd
           name: 'Modem A Acquire status'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.1.1.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.1.1.0]'
           key: integraXmodemAacquireStatus
           history: 90d
           trends: 30d
@@ -631,7 +631,7 @@ zabbix_export:
         - uuid: 19c8155485564d7caefa1430c3489652
           name: 'Modem A performance background block errors'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.1.17.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.1.17.0]'
           key: integraXmodemAbackgroundBlockError
           history: 90d
           value_type: FLOAT
@@ -643,7 +643,7 @@ zabbix_export:
         - uuid: 00242cb94aee47bc840d3d354642cd10
           name: 'Modem A BBE'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.1.21.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.1.21.0]'
           key: integraXmodemAbackgroundBlockErrorRatio
           history: 90d
           value_type: FLOAT
@@ -668,7 +668,7 @@ zabbix_export:
         - uuid: 0648a63da71b456981765644b020aa56
           name: 'Modem A ACM carrier offset'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.1.12.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.1.12.0]'
           key: integraXmodemAcarrierOffset
           history: 90d
           value_type: FLOAT
@@ -702,7 +702,7 @@ zabbix_export:
         - uuid: 7ae571b1529e494ebd6142e11bfb37d9
           name: 'Modem A performance count time'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.1.13.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.1.13.0]'
           key: integraXmodemAcountTime
           delay: 5m
           history: 90d
@@ -718,7 +718,7 @@ zabbix_export:
         - uuid: a65eb6ae09f04976b4b41333ded50432
           name: 'Modem A performance errored blocks'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.1.14.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.1.14.0]'
           key: integraXmodemAerroredBlock
           delay: 5m
           history: 90d
@@ -730,7 +730,7 @@ zabbix_export:
         - uuid: 0773379626604bd1836fcf89be9356f3
           name: 'Modem A errored seconds'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.1.15.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.1.15.0]'
           key: integraXmodemAerroredSecond
           history: 90d
           trends: 30d
@@ -755,7 +755,7 @@ zabbix_export:
         - uuid: 241721a15b6945f7ab070e1f50c02cec
           name: 'Modem A errored second ratio'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.1.19.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.1.19.0]'
           key: integraXmodemAerroredSecondRatio
           history: 90d
           value_type: FLOAT
@@ -765,7 +765,7 @@ zabbix_export:
         - uuid: 3b8bc849a92a4a0b8fc6a3b6268ef9bb
           name: 'Modem A LDPC block counter'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.1.24.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.1.24.0]'
           key: integraXmodemAfecLdpcBlockCounter
           history: 90d
           trends: 30d
@@ -776,7 +776,7 @@ zabbix_export:
         - uuid: 4e745aedc48e4905a61d7171133c105a
           name: 'Modem A FEC load uncorrected block counter'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.1.25.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.1.25.0]'
           key: integraXmodemAfecLdpcUncorrectedBlockCounter
           history: 90d
           trends: 30d
@@ -798,7 +798,7 @@ zabbix_export:
         - uuid: 96c42a33f0e54669a8100fad89fad9d9
           name: 'Modem A FEC load uncorrected percent'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.1.26.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.1.26.0]'
           key: integraXmodemAfecLdpcUncorrectedPercent
           history: 90d
           value_type: FLOAT
@@ -810,7 +810,7 @@ zabbix_export:
         - uuid: 5ae1140684f04d908822db703962e34e
           name: 'Modem A FEC load'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.1.3.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.1.3.0]'
           key: integraXmodemAfecLoad
           history: 90d
           value_type: FLOAT
@@ -834,7 +834,7 @@ zabbix_export:
         - uuid: 990a6f38db9545288ec87b13493bc529
           name: 'Modem A FEC load RS block counter'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.1.27.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.1.27.0]'
           key: integraXmodemAfecRsBlockCounter
           history: 90d
           trends: 30d
@@ -844,7 +844,7 @@ zabbix_export:
         - uuid: 527b88f0302b4abcba46d33ed80062e7
           name: 'Modem A FEC load RS uncorrected block counter'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.1.28.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.1.28.0]'
           key: integraXmodemAfecRsUncorrectedBlockCounter
           history: 90d
           trends: 30d
@@ -854,7 +854,7 @@ zabbix_export:
         - uuid: a036886c15df4601b42c9073e540e78c
           name: 'Modem A ACM max modulation'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.1.30.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.1.30.0]'
           key: integraXmodemAmodulationACMmax
           history: 90d
           units: '!QAM'
@@ -869,7 +869,7 @@ zabbix_export:
         - uuid: 16756af3500147d3a36cc230ec737608
           name: 'Modem A ACM min modulation'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.1.29.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.1.29.0]'
           key: integraXmodemAmodulationACMmin
           history: 90d
           units: '!QAM'
@@ -884,7 +884,7 @@ zabbix_export:
         - uuid: db4066d6e41a45b5bf2d3a797eae42e8
           name: 'Modem A MSE'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.1.2.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.1.2.0]'
           key: integraXmodemAnormalizedMse
           history: 90d
           value_type: FLOAT
@@ -914,7 +914,7 @@ zabbix_export:
         - uuid: 1110ac40bd3a4181a8235d5fc53727f1
           name: 'Modem A Current Rx capacity'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.1.9.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.1.9.0]'
           key: integraXmodemArxCapacity
           history: 90d
           trends: 30d
@@ -943,7 +943,7 @@ zabbix_export:
         - uuid: 5e29e995ff804587899e82efa5e87537
           name: 'Modem A actual Rx modulation'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.1.7.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.1.7.0]'
           key: integraXmodemArxModulation
           history: 90d
           value_type: LOG
@@ -975,7 +975,7 @@ zabbix_export:
         - uuid: e409a14686f445ac885752e709c397e1
           name: 'Modem A severely Errored seconds'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.1.16.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.1.16.0]'
           key: integraXmodemAseverelyErroredSecond
           history: 90d
           trends: 30d
@@ -1013,7 +1013,7 @@ zabbix_export:
         - uuid: 1dd76a52d6b448c3a1dcadefa2947498
           name: 'Modem A severely Errored second ratio'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.1.20.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.1.20.0]'
           key: integraXmodemAseverelyErroredSecondRatio
           history: 90d
           value_type: FLOAT
@@ -1025,7 +1025,7 @@ zabbix_export:
         - uuid: 9beef8fe02394d3ca9355e6e15817f7f
           name: 'Modem A temperature'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.1.6.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.1.6.0]'
           key: integraXmodemAtemperature
           history: 90d
           value_type: FLOAT
@@ -1064,7 +1064,7 @@ zabbix_export:
         - uuid: 59998d37eb3240ea8fdbddb5986ad64b
           name: 'Modem A severely total block number'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.1.18.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.1.18.0]'
           key: integraXmodemAtotalBlockNumber
           history: 90d
           trends: 30d
@@ -1074,7 +1074,7 @@ zabbix_export:
         - uuid: fd2012d5212d4c749ef605656a690643
           name: 'Modem A current Tx capacity'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.1.10.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.1.10.0]'
           key: integraXmodemAtxCapacity
           history: 90d
           trends: 30d
@@ -1103,7 +1103,7 @@ zabbix_export:
         - uuid: 0f65120277a24283879e5ff5099cdd0c
           name: 'Modem A actual Tx modulation'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.1.8.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.1.8.0]'
           key: integraXmodemAtxModulation
           delay: '60'
           history: 90d
@@ -1153,7 +1153,7 @@ zabbix_export:
         - uuid: b56884a807f0420092f4c3a323e95f37
           name: 'Modem A unavailable time'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.1.23.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.1.23.0]'
           key: integraXmodemAunavailtime
           history: 90d
           trends: 30d
@@ -1178,7 +1178,7 @@ zabbix_export:
         - uuid: 9f0cafd4f88b494c974cad31f0942e18
           name: 'Modem A uptime'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.1.22.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.1.22.0]'
           key: integraXmodemAuptime
           history: 90d
           trends: 30d
@@ -1189,7 +1189,7 @@ zabbix_export:
         - uuid: f8b1f74e8c444388b79937b51226abc7
           name: 'Modem A estimated XPD'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.1.4.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.1.4.0]'
           key: integraXmodemAxpdEst
           history: 90d
           value_type: FLOAT
@@ -1205,7 +1205,7 @@ zabbix_export:
         - uuid: 138c9dac0e3f41f38a2c0f7c3af85158
           name: 'Modem B ACM engine status'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.2.11.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.2.11.0]'
           key: integraXmodemBacmEngine
           history: 90d
           valuemap:
@@ -1218,7 +1218,7 @@ zabbix_export:
         - uuid: 69cdadb074204c63aa2bca2c66f49715
           name: 'Modem B acquire last status details'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.2.5.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.2.5.0]'
           key: integraXmodemBacquireLastStatusDetails
           history: 90d
           valuemap:
@@ -1243,7 +1243,7 @@ zabbix_export:
         - uuid: 3bd478f612ce4ec9a1e8fbba7aadeed8
           name: 'Modem B acquire status'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.2.1.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.2.1.0]'
           key: integraXmodemBacquireStatus
           history: 90d
           trends: 30d
@@ -1267,7 +1267,7 @@ zabbix_export:
         - uuid: f159797625a1481582f1633aee00c286
           name: Bandwidth
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.3.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.3.0]'
           key: integraXmodemBandwidth
           delay: 3h
           history: 90d
@@ -1289,7 +1289,7 @@ zabbix_export:
         - uuid: 0b19cd8b2fdc47b0a9817560558acccf
           name: 'Modem B performance background block errors'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.2.17.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.2.17.0]'
           key: integraXmodemBbackgroundBlockError
           history: 90d
           value_type: FLOAT
@@ -1304,7 +1304,7 @@ zabbix_export:
         - uuid: 4f37d232f9784a48b725a77356bf55d2
           name: 'Modem B BBE'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.2.21.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.2.21.0]'
           key: integraXmodemBbackgroundBlockErrorRatio
           history: 90d
           value_type: FLOAT
@@ -1330,7 +1330,7 @@ zabbix_export:
         - uuid: 971cd93af2614939a3f5c220801a4d28
           name: 'Modem B ACM carrier offset'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.2.12.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.2.12.0]'
           key: integraXmodemBcarrierOffset
           history: 90d
           value_type: FLOAT
@@ -1364,7 +1364,7 @@ zabbix_export:
         - uuid: 1c236d8521cb4ae0b62d317e4725fbaf
           name: 'Modem B performance count time'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.2.13.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.2.13.0]'
           key: integraXmodemBcountTime
           delay: 5m
           history: 90d
@@ -1379,7 +1379,7 @@ zabbix_export:
         - uuid: 6406bdc5c34e437f80bf8ec4f9925034
           name: 'Modem B performance errored blocks'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.2.14.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.2.14.0]'
           key: integraXmodemBerroredBlock
           delay: 5m
           history: 90d
@@ -1394,7 +1394,7 @@ zabbix_export:
         - uuid: 34fec8413e474ba483af884fe9ec2cca
           name: 'Modem B errored seconds'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.2.15.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.2.15.0]'
           key: integraXmodemBerroredSecond
           history: 90d
           trends: 30d
@@ -1419,7 +1419,7 @@ zabbix_export:
         - uuid: bc174df59a9d44c29a104836d9e71c9f
           name: 'Modem B errored seconds ratio'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.2.19.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.2.19.0]'
           key: integraXmodemBerroredSecondRatio
           history: 90d
           value_type: FLOAT
@@ -1430,7 +1430,7 @@ zabbix_export:
         - uuid: e52dda3bca5445619fa53028b80dce64
           name: 'Modem B LDPC block counter'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.2.24.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.2.24.0]'
           key: integraXmodemBfecLdpcBlockCounter
           history: 90d
           trends: 30d
@@ -1440,7 +1440,7 @@ zabbix_export:
         - uuid: 68699c5f6d3848afb516d37815415650
           name: 'Modem B FEC load uncorrected block counter'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.2.25.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.2.25.0]'
           key: integraXmodemBfecLdpcUncorrectedBlockCounter
           history: 90d
           trends: 30d
@@ -1463,7 +1463,7 @@ zabbix_export:
         - uuid: a7ffb0d2ad8e417eb2ee8d35eae71d11
           name: 'Modem B FEC load uncorrected percent'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.2.26.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.2.26.0]'
           key: integraXmodemBfecLdpcUncorrectedPercent
           history: 90d
           value_type: FLOAT
@@ -1475,7 +1475,7 @@ zabbix_export:
         - uuid: f505d8dfc8d145b18d83b01ad9475c19
           name: 'Modem B FEC load'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.2.3.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.2.3.0]'
           key: integraXmodemBfecLoad
           history: 90d
           value_type: FLOAT
@@ -1499,7 +1499,7 @@ zabbix_export:
         - uuid: fa46df9d1e234fcba26d30389d093d7b
           name: 'Modem B FEC load RS block counter'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.2.27.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.2.27.0]'
           key: integraXmodemBfecRsBlockCounter
           history: 90d
           trends: 30d
@@ -1509,7 +1509,7 @@ zabbix_export:
         - uuid: 7c5a084bc29c45e9a7fa3468d8699211
           name: 'Modem B FEC load RS uncorrected block counter'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.2.28.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.2.28.0]'
           key: integraXmodemBfecRsUncorrectedBlockCounter
           history: 90d
           trends: 30d
@@ -1519,7 +1519,7 @@ zabbix_export:
         - uuid: 3dcbd6c6a0ac46f0ad6964be5787b579
           name: 'Modem B ACM max modulation'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.2.30.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.2.30.0]'
           key: integraXmodemBmodulationACMmax
           history: 90d
           units: '!QAM'
@@ -1534,7 +1534,7 @@ zabbix_export:
         - uuid: 19657188a34e4ec2b3ef7bad754794a8
           name: 'Modem B ACM min modulation'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.2.29.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.2.29.0]'
           key: integraXmodemBmodulationACMmin
           history: 90d
           units: '!QAM'
@@ -1549,7 +1549,7 @@ zabbix_export:
         - uuid: 895a03c48dde440bb083fac00fcbf753
           name: 'Modem B MSE'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.2.2.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.2.2.0]'
           key: integraXmodemBnormalizedMse
           history: 90d
           value_type: FLOAT
@@ -1571,7 +1571,7 @@ zabbix_export:
         - uuid: 86877cce757e44928863c37c3a4e3943
           name: 'Modem B current Rx capacity'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.2.9.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.2.9.0]'
           key: integraXmodemBrxCapacity
           history: 90d
           trends: 30d
@@ -1600,7 +1600,7 @@ zabbix_export:
         - uuid: 91d78cd7187d482daf7071e158faf0e2
           name: 'Modem B Rx actual modulation'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.2.7.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.2.7.0]'
           key: integraXmodemBrxModulation
           delay: '60'
           history: 90d
@@ -1633,7 +1633,7 @@ zabbix_export:
         - uuid: 44c2cb87c15f4ebe84c7545207185785
           name: 'Modem B severely Errored seconds'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.2.16.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.2.16.0]'
           key: integraXmodemBseverelyErroredSecond
           history: 90d
           value_type: FLOAT
@@ -1672,7 +1672,7 @@ zabbix_export:
         - uuid: 852ef4cf0cfc4b57a1244a1451acc45a
           name: 'Modem B severely Errored seconds ratio'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.2.20.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.2.20.0]'
           key: integraXmodemBseverelyErroredSecondRatio
           history: 90d
           value_type: FLOAT
@@ -1683,7 +1683,7 @@ zabbix_export:
         - uuid: e23b9bf5b656447595fa9dc987d53680
           name: 'Modem B temperature'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.2.6.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.2.6.0]'
           key: integraXmodemBtemperature
           history: 90d
           value_type: FLOAT
@@ -1722,7 +1722,7 @@ zabbix_export:
         - uuid: 1af197b19473430ea90e2b720717ef0b
           name: 'Modem B severely total block number'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.2.18.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.2.18.0]'
           key: integraXmodemBtotalBlockNumber
           history: 90d
           value_type: FLOAT
@@ -1733,7 +1733,7 @@ zabbix_export:
         - uuid: 71e7f59adc7e4b3e8f5165c1ac62c76e
           name: 'Modem B current Tx capacity'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.2.10.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.2.10.0]'
           key: integraXmodemBtxCapacity
           history: 90d
           value_type: FLOAT
@@ -1763,7 +1763,7 @@ zabbix_export:
         - uuid: 594452f48d624387b165abe137874b7f
           name: 'Modem B actual Tx modulation Tx'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.2.8.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.2.8.0]'
           key: integraXmodemBtxModulation
           delay: '60'
           history: 90d
@@ -1813,7 +1813,7 @@ zabbix_export:
         - uuid: 01a5ff974f23485fa965ecbb673bce03
           name: 'Modem B unavailable time'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.2.23.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.2.23.0]'
           key: integraXmodemBunavailtime
           history: 90d
           trends: 30d
@@ -1838,7 +1838,7 @@ zabbix_export:
         - uuid: a648329582914d308b3f5ea69b634596
           name: 'Modem B uptime'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.2.22.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.2.22.0]'
           key: integraXmodemBuptime
           history: 90d
           trends: 30d
@@ -1849,7 +1849,7 @@ zabbix_export:
         - uuid: e97e529cceb845f99500f095d9192fa9
           name: 'Modem B estimated XPD'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.2.4.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.2.4.0]'
           key: integraXmodemBxpdEst
           history: 90d
           value_type: FLOAT
@@ -1866,7 +1866,7 @@ zabbix_export:
         - uuid: bbf585dd5ea0418b920c114878597aaa
           name: 'Operational mode'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.3.5.1.1.2.1]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.3.5.1.1.2.1]'
           key: integraXmodemConfigRunningTable
           delay: 30m
           history: 90d
@@ -1890,7 +1890,7 @@ zabbix_export:
         - uuid: b11fbe3c6423463e80aa55c8f4cf9fe7
           name: 'IP address Local'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.9.1.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.9.1.0]'
           key: integraXnetCfgIPaddress
           delay: 3h
           history: 90d
@@ -1902,7 +1902,7 @@ zabbix_export:
         - uuid: f567cb6d80234968a646c4baf6e76735
           name: 'IP Address Remote'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.9.4.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.9.4.0]'
           key: integraXnetCfgRemoteIPaddress
           delay: 3h
           history: 90d
@@ -1914,7 +1914,7 @@ zabbix_export:
         - uuid: 7fbcf07e52724ef597ff9a647d119b7d
           name: 'ATPC RX (remote) max level'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.2.1.16.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.2.1.16.0]'
           key: integraXradioAatpcRxLevelMax
           delay: 3h
           history: 90d
@@ -1927,7 +1927,7 @@ zabbix_export:
         - uuid: 59deb2af22c844d5abe88cfd466125f1
           name: 'ATPC RX (remote) min level'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.2.1.15.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.2.1.15.0]'
           key: integraXradioAatpcRxLevelMin
           delay: 3h
           history: 90d
@@ -1940,7 +1940,7 @@ zabbix_export:
         - uuid: eee9fcb5e62a48cda73256b19bb8e4a6
           name: 'ATPC Status'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.2.1.13.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.2.1.13.0]'
           key: integraXradioAatpcState
           delay: 3h
           history: 90d
@@ -1954,7 +1954,7 @@ zabbix_export:
         - uuid: 585c2cf02c114faeb3b105c7836c00c5
           name: 'Duplex shift RadioA'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.2.1.8.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.2.1.8.0]'
           key: integraXradioAduplexShift
           history: 90d
           value_type: FLOAT
@@ -1971,7 +1971,7 @@ zabbix_export:
         - uuid: 263b5306caa640cd8e631f2cddd94199
           name: 'PLL status RadioA'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.2.1.11.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.2.1.11.0]'
           key: integraXradioApll
           history: 90d
           trends: 10d
@@ -1997,7 +1997,7 @@ zabbix_export:
         - uuid: ef1a7bf0b53b49f89c54962e561f2e06
           name: 'Frequency Rx Radio A'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.2.1.9.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.2.1.9.0]'
           key: integraXradioArxFrequency
           delay: 3h
           history: 90d
@@ -2028,7 +2028,7 @@ zabbix_export:
         - uuid: 79eca4284f1c4b1a95d7f9f22ba2f28e
           name: 'RX level RadioA'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.2.1.3.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.2.1.3.0]'
           key: integraXradioArxLevel
           history: 90d
           value_type: FLOAT
@@ -2051,7 +2051,7 @@ zabbix_export:
         - uuid: e79ea34ef90d48228dd85b83c54eb368
           name: 'Rx level state RadioA'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.2.1.4.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.2.1.4.0]'
           key: integraXradioArxLevelState
           history: 90d
           valuemap:
@@ -2062,7 +2062,7 @@ zabbix_export:
         - uuid: 8c7e6b398d034c6eaf5024a50b366fbf
           name: 'RadioA side'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.2.1.5.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.2.1.5.0]'
           key: integraXradioAside
           delay: 3h
           history: 90d
@@ -2076,7 +2076,7 @@ zabbix_export:
         - uuid: f14d4a4c4dd44f9c982e30138bcd5417
           name: 'Frequency Tx RadioA'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.2.1.2.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.2.1.2.0]'
           key: integraXradioAtxFrequency
           history: 90d
           value_type: FLOAT
@@ -2101,7 +2101,7 @@ zabbix_export:
         - uuid: b8910284e62d4bc1816a122ecc4ac264
           name: 'RadioA Tx mute'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.2.1.6.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.2.1.6.0]'
           key: integraXradioAtxMute
           history: 90d
           trends: 10d
@@ -2113,7 +2113,7 @@ zabbix_export:
         - uuid: ef31be6a71b34699af6e2833b847c802
           name: 'RadioA Tx mute duration'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.2.1.7.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.2.1.7.0]'
           key: integraXradioAtxMuteDuration
           history: 90d
           trends: 10d
@@ -2126,7 +2126,7 @@ zabbix_export:
         - uuid: 5b6f8c18e1334b2e9618860ffbef7327
           name: 'Tx power RadioA'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.2.1.1.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.2.1.1.0]'
           key: integraXradioAtxPower
           history: 90d
           trends: 10d
@@ -2137,7 +2137,7 @@ zabbix_export:
         - uuid: fd605ec5a310410fa08d5d4c55d96262
           name: 'Duplex shift RadioB'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.2.2.8.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.2.2.8.0]'
           key: integraXradioBduplexShift
           delay: 3h
           history: 90d
@@ -2155,7 +2155,7 @@ zabbix_export:
         - uuid: 825b8c60a492445eb1f9d58a5eb72266
           name: 'PLL status RadioB'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.2.2.11.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.2.2.11.0]'
           key: integraXradioBpll
           history: 90d
           trends: 10d
@@ -2181,7 +2181,7 @@ zabbix_export:
         - uuid: 6c62687ff3014c78b2a227d4f683ecaf
           name: 'Frequency Rx RadioB'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.2.2.9.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.2.2.9.0]'
           key: integraXradioBrxFrequency
           history: 90d
           trends: 10d
@@ -2205,7 +2205,7 @@ zabbix_export:
         - uuid: d7f6e863ff7e43419b6e13205d95fa4d
           name: 'Rx level RadioB'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.2.2.3.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.2.2.3.0]'
           key: integraXradioBrxLevel
           history: 90d
           value_type: FLOAT
@@ -2228,7 +2228,7 @@ zabbix_export:
         - uuid: d6440683d5e54dcdb80547591439e87f
           name: 'Rx level state RadioB'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.2.2.4.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.2.2.4.0]'
           key: integraXradioBrxLevelState
           history: 90d
           valuemap:
@@ -2239,7 +2239,7 @@ zabbix_export:
         - uuid: 7d163b791b4a4870b08c530a8eab4be3
           name: 'RadioB side'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.2.2.5.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.2.2.5.0]'
           key: integraXradioBside
           delay: 3h
           history: 90d
@@ -2253,7 +2253,7 @@ zabbix_export:
         - uuid: 464ae8bd776c4785bcdc2b7eb0283089
           name: 'Frequency Tx RadioB'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.2.2.2.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.2.2.2.0]'
           key: integraXradioBtxFrequency
           history: 90d
           trends: 10d
@@ -2277,7 +2277,7 @@ zabbix_export:
         - uuid: 4007095ce3ec46058ff2f5e22b0b5ba1
           name: 'RadioB Tx mute'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.2.2.6.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.2.2.6.0]'
           key: integraXradioBtxMute
           history: 90d
           trends: 10d
@@ -2289,7 +2289,7 @@ zabbix_export:
         - uuid: fb03c18727914327a7c9bbe2961a36bb
           name: 'RadioB Tx mute duration'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.2.2.7.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.2.2.7.0]'
           key: integraXradioBtxMuteDuration
           history: 90d
           trends: 10d
@@ -2302,7 +2302,7 @@ zabbix_export:
         - uuid: fa1f5bcc902a44ea88cccb040fa7f115
           name: 'Tx power RadioB'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.2.2.1.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.2.2.1.0]'
           key: integraXradioBtxPower
           history: 90d
           trends: 10d
@@ -2313,7 +2313,7 @@ zabbix_export:
         - uuid: ab3d161109e6480ba75868e22cf36b40
           name: 'System temperature'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.4.8.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.4.8.0]'
           key: integraXsysBoardTemperature
           history: 90d
           value_type: FLOAT
@@ -2340,7 +2340,7 @@ zabbix_export:
         - uuid: af4fc26ef35a426199ffe14d57d4eacd
           name: Coordinates
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.4.47.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.4.47.0]'
           key: integraXsysCoordinates
           delay: 3h
           history: 90d
@@ -2352,7 +2352,7 @@ zabbix_export:
         - uuid: bc64b34c90764963931c964256f51424
           name: 'CPU Idle'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.4.10.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.4.10.0]'
           key: integraXsysCPUidle
           history: 90d
           trends: 30d
@@ -2367,7 +2367,7 @@ zabbix_export:
         - uuid: 13837e6837554b5582d978a3f24edcb3
           name: 'CPU temperature'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.4.2.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.4.2.0]'
           key: integraXsysCPUtemperature
           history: 90d
           trends: 30d
@@ -2468,7 +2468,7 @@ zabbix_export:
         - uuid: 2572d6dbee784dcc83922707863d525f
           name: 'Fan1 and Fan2 status'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.4.14.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.4.14.0]'
           key: integraXsysFanError
           history: 90d
           trends: 30d
@@ -2486,7 +2486,7 @@ zabbix_export:
         - uuid: 57c41aa8113f46cea9ec6a2e127e35c1
           name: 'System Free memory'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.4.9.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.4.9.0]'
           key: integraXsysFreeMemory
           history: 90d
           value_type: FLOAT
@@ -2502,7 +2502,7 @@ zabbix_export:
         - uuid: 3ffbdb0e0361413d9725eaf2ff81391f
           name: 'License expire'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.4.3.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.4.3.0]'
           key: integraXsysLicenseExpire
           delay: 3h
           history: 90d
@@ -2514,7 +2514,7 @@ zabbix_export:
         - uuid: 88dda313a858456f9323cc488fdac22f
           name: 'PSU current'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.4.6.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.4.6.0]'
           key: integraXsysPSUcurrent
           history: 90d
           value_type: FLOAT
@@ -2541,7 +2541,7 @@ zabbix_export:
         - uuid: 2ef7b8d1c77647688172d38f045c2a0a
           name: 'PSU power'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.4.7.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.4.7.0]'
           key: integraXsysPSUpower
           history: 90d
           value_type: FLOAT
@@ -2568,7 +2568,7 @@ zabbix_export:
         - uuid: 125a5577a97f4a0388bb2fe4272e396d
           name: 'PSU voltage'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.4.5.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.4.5.0]'
           key: integraXsysPSUvoltage
           history: 90d
           value_type: FLOAT
@@ -2615,7 +2615,7 @@ zabbix_export:
         - uuid: 2caf88b7194c4a9ab9b8edb12420b3b0
           name: 'RadioA temperature'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.2.1.10.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.2.1.10.0]'
           key: rintegraXradioAtemperature
           history: 90d
           value_type: FLOAT
@@ -2650,7 +2650,7 @@ zabbix_export:
         - uuid: 67e3b4b4fbf54d9fabb587f8162d99a7
           name: 'RadioB temperature'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.2.2.10.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.2.2.10.0]'
           key: rintegraXradioBtemperature
           history: 90d
           value_type: FLOAT
@@ -2685,7 +2685,7 @@ zabbix_export:
         - uuid: ed8f09c04d3d488ca0688e397ea87df4
           name: 'System data'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.2.1.1.1.0]'
+          snmp_oid: 'get[.1.3.6.1.2.1.1.1.0]'
           key: sysDescr.IntE3
           delay: 2h
           history: 90d
@@ -2699,7 +2699,7 @@ zabbix_export:
         - uuid: cabd24f3752f42eea833cb26bb51c04c
           name: 'System contact details'
           type: SNMP_AGENT
-          snmp_oid: 'get[ 1.3.6.1.2.1.1.4.0]'
+          snmp_oid: 'get[1.3.6.1.2.1.1.4.0]'
           key: 'system.contact[sysContact.0]'
           delay: 3h
           history: 2w
@@ -2713,7 +2713,7 @@ zabbix_export:
         - uuid: b7e99b8ed05f4ceaa64f5fc2e58bb347
           name: 'Location name'
           type: SNMP_AGENT
-          snmp_oid: 'get[ 1.3.6.1.2.1.1.6.0]'
+          snmp_oid: 'get[1.3.6.1.2.1.1.6.0]'
           key: system.location
           delay: 3h
           history: 2w
@@ -2731,7 +2731,7 @@ zabbix_export:
         - uuid: b737ba67747549ce84fe1043ca249607
           name: 'System name'
           type: SNMP_AGENT
-          snmp_oid: 'get[ 1.3.6.1.2.1.1.5.0]'
+          snmp_oid: 'get[1.3.6.1.2.1.1.5.0]'
           key: system.name
           delay: 3h
           history: 2w
@@ -2757,7 +2757,7 @@ zabbix_export:
         - uuid: 42f916935ffc42b381365d94e9f3ea7b
           name: 'System object ID'
           type: SNMP_AGENT
-          snmp_oid: 'get[ 1.3.6.1.2.1.1.2.0]'
+          snmp_oid: 'get[1.3.6.1.2.1.1.2.0]'
           key: 'system.objectid[sysObjectID.0]'
           delay: 3h
           history: 2w
@@ -2770,7 +2770,7 @@ zabbix_export:
         - uuid: 54df7f4cdd884fb0a3984c7fc3772cdf
           name: 'System uptime'
           type: SNMP_AGENT
-          snmp_oid: 'get[ 1.3.6.1.2.1.1.3.0]'
+          snmp_oid: 'get[1.3.6.1.2.1.1.3.0]'
           key: 'system.uptime[sysUpTime.0]'
           delay: 5m
           history: 2w
@@ -2798,7 +2798,7 @@ zabbix_export:
         - uuid: 85f46f5e688a4418ac504a1aec2e117e
           name: 'License status'
           type: SNMP_AGENT
-          snmp_oid: 'get[ .1.3.6.1.4.1.7571.100.1.1.7.10.4.4.0]'
+          snmp_oid: 'get[.1.3.6.1.4.1.7571.100.1.1.7.10.4.4.0]'
           key: uintegraXsysLicenseGenStatus
           delay: 3h
           history: 90d

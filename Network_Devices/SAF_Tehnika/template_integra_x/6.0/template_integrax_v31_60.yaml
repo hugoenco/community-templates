@@ -1,6 +1,6 @@
 zabbix_export:
   version: '6.0'
-  date: '2025-03-04T08:03:57Z'
+  date: '2025-03-04T13:22:11Z'
   groups:
     - uuid: b99c3d62653945ca8a2901d2d339024f
       name: Integra-X
@@ -20,7 +20,7 @@ zabbix_export:
         - uuid: 78e330947cce457ebb2be0d77f7d7228
           name: 'CPU load'
           type: CALCULATED
-          key: CPU_load_Integra_X
+          key: integraXCPU_load
           trends: 30d
           value_type: FLOAT
           units: '%'
@@ -30,16 +30,16 @@ zabbix_export:
               value: '7 Status'
           triggers:
             - uuid: 0fe9406063e0457b91a6c638cfc71b06
-              expression: 'last(/SAF BASIC Integra-X template V31 for Zabbix 6.0/CPU_load_Integra_X)>80'
+              expression: 'last(/SAF BASIC Integra-X template V31 for Zabbix 6.0/integraXCPU_load)>80'
               recovery_mode: RECOVERY_EXPRESSION
-              recovery_expression: 'last(/SAF BASIC Integra-X template V31 for Zabbix 6.0/CPU_load_Integra_X)<75'
+              recovery_expression: 'last(/SAF BASIC Integra-X template V31 for Zabbix 6.0/integraXCPU_load)<75'
               name: 'CPU load {ITEM.LASTVALUE}'
               priority: WARNING
               manual_close: 'YES'
         - uuid: ef122899bec648d18fe0ca058d98b18a
           name: 'FW version'
           type: DEPENDENT
-          key: Firmware_version_raw
+          key: integraXFirmware_version_raw
           delay: '0'
           trends: '0'
           value_type: TEXT
@@ -50,7 +50,7 @@ zabbix_export:
                 - 'Vers: ([^ ]*);'
                 - \1
           master_item:
-            key: sysDescr.IntE3
+            key: integraXsysDescr.IntE3
           tags:
             - tag: Component
               value: '1 Overall Parameters'
@@ -58,14 +58,14 @@ zabbix_export:
               value: '9 System'
           triggers:
             - uuid: 250e1f535f5e49c6b8e97399d99fa0fd
-              expression: '(last(/SAF BASIC Integra-X template V31 for Zabbix 6.0/Firmware_version_raw,#1)<>last(/SAF BASIC Integra-X template V31 for Zabbix 6.0/Firmware_version_raw,#2))=1'
+              expression: '(last(/SAF BASIC Integra-X template V31 for Zabbix 6.0/integraXFirmware_version_raw,#1)<>last(/SAF BASIC Integra-X template V31 for Zabbix 6.0/integraXFirmware_version_raw,#2))=1'
               name: 'FW changed to {ITEM.LASTVALUE}'
               priority: INFO
               manual_close: 'YES'
         - uuid: 9bcfc5341ef14deb9707eca9fd80dfa7
           name: 'ICMP ping'
           type: SIMPLE
-          key: icmpping
+          key: integraXicmpping
           history: 1w
           valuemap:
             name: 'Service state'
@@ -74,7 +74,7 @@ zabbix_export:
               value: '7 Status'
           triggers:
             - uuid: 3a6d3e6db5974c58ad6ebea543205d73
-              expression: 'max(/SAF BASIC Integra-X template V31 for Zabbix 6.0/icmpping,#3)=0'
+              expression: 'max(/SAF BASIC Integra-X template V31 for Zabbix 6.0/integraXicmpping,#3)=0'
               name: 'Unavailable by ICMP ping'
               priority: DISASTER
               description: |
@@ -83,7 +83,7 @@ zabbix_export:
         - uuid: c83b91fefbe14790b711f9b7beac241e
           name: 'ICMP loss'
           type: SIMPLE
-          key: icmppingloss
+          key: integraXicmppingloss
           history: 1w
           value_type: FLOAT
           units: '%'
@@ -92,16 +92,16 @@ zabbix_export:
               value: '7 Status'
           triggers:
             - uuid: 08343cf6b59a4ff8b3b251abef026969
-              expression: 'min(/SAF BASIC Integra-X template V31 for Zabbix 6.0/icmppingloss,5m)>{$ICMP_LOSS_WARN} and min(/SAF BASIC Integra-X template V31 for Zabbix 6.0/icmppingloss,5m)<100'
+              expression: 'min(/SAF BASIC Integra-X template V31 for Zabbix 6.0/integraXicmppingloss,5m)>{$ICMP_LOSS_WARN} and min(/SAF BASIC Integra-X template V31 for Zabbix 6.0/integraXicmppingloss,5m)<100'
               name: 'High ICMP ping loss'
               priority: WARNING
               dependencies:
                 - name: 'Unavailable by ICMP ping'
-                  expression: 'max(/SAF BASIC Integra-X template V31 for Zabbix 6.0/icmpping,#3)=0'
+                  expression: 'max(/SAF BASIC Integra-X template V31 for Zabbix 6.0/integraXicmpping,#3)=0'
         - uuid: de7edee1729e4434a6a329e0d5f50bf3
           name: 'ICMP response time'
           type: SIMPLE
-          key: icmppingsec
+          key: integraXicmppingsec
           history: 1w
           value_type: FLOAT
           units: s
@@ -110,15 +110,15 @@ zabbix_export:
               value: '7 Status'
           triggers:
             - uuid: 04e51830d2374972bc49581f8c54d542
-              expression: 'avg(/SAF BASIC Integra-X template V31 for Zabbix 6.0/icmppingsec,5m)>{$ICMP_RESPONSE_TIME_WARN}'
+              expression: 'avg(/SAF BASIC Integra-X template V31 for Zabbix 6.0/integraXicmppingsec,5m)>{$ICMP_RESPONSE_TIME_WARN}'
               name: 'High ICMP ping response time {ITEM.LASTVALUE}'
               opdata: 'Value: {ITEM.LASTVALUE1}'
               priority: WARNING
               dependencies:
                 - name: 'High ICMP ping loss'
-                  expression: 'min(/SAF BASIC Integra-X template V31 for Zabbix 6.0/icmppingloss,5m)>{$ICMP_LOSS_WARN} and min(/SAF BASIC Integra-X template V31 for Zabbix 6.0/icmppingloss,5m)<100'
+                  expression: 'min(/SAF BASIC Integra-X template V31 for Zabbix 6.0/integraXicmppingloss,5m)>{$ICMP_LOSS_WARN} and min(/SAF BASIC Integra-X template V31 for Zabbix 6.0/integraXicmppingloss,5m)<100'
                 - name: 'Unavailable by ICMP ping'
-                  expression: 'max(/SAF BASIC Integra-X template V31 for Zabbix 6.0/icmpping,#3)=0'
+                  expression: 'max(/SAF BASIC Integra-X template V31 for Zabbix 6.0/integraXicmpping,#3)=0'
         - uuid: 619e1d3052f746a8a431230acc77734f
           name: 'WANHP dropped bits'
           type: SNMP_AGENT
@@ -304,6 +304,8 @@ zabbix_export:
           key: integraXifLspPortDownBlockedByLspAdvanced
           delay: 30m
           history: 10d
+          trends: '0'
+          value_type: CHAR
           valuemap:
             name: SAF_LSP_port_list
           tags:
@@ -316,6 +318,8 @@ zabbix_export:
           key: integraXifLspPortList
           delay: 30m
           history: 10d
+          trends: '0'
+          value_type: CHAR
           valuemap:
             name: SAF_LSP_port_list
           tags:
@@ -1939,9 +1943,20 @@ zabbix_export:
             - tag: Component
               value: '4 Radio A'
           triggers:
+            - uuid: 8bdf02ab095b4906a2032a8c6fb8decb
+              expression: 'last(/SAF BASIC Integra-X template V31 for Zabbix 6.0/integraXradioArxLevel)>={$RXLEVMAX}'
+              name: 'Radio A Rx level {ITEM.LASTVALUE} too high'
+              priority: HIGH
+              manual_close: 'YES'
+              dependencies:
+                - name: 'Operational mode B'
+                  expression: 'last(/SAF BASIC Integra-X template V31 for Zabbix 6.0/integraXmodemConfigRunningTable)="B"'
+              tags:
+                - tag: Component
+                  value: RadioA
             - uuid: 1def296c8dfe42d38e03f3a93148a3d7
-              expression: '(last(/SAF BASIC Integra-X template V31 for Zabbix 6.0/integraXradioArxLevel)<={$RXLEVMIN} or last(/SAF BASIC Integra-X template V31 for Zabbix 6.0/integraXradioArxLevel)>={$RXLEVMAX})'
-              name: 'Radio A Rx level {ITEM.LASTVALUE}'
+              expression: 'last(/SAF BASIC Integra-X template V31 for Zabbix 6.0/integraXradioArxLevel)<={$RXLEVMIN}'
+              name: 'Radio A Rx level {ITEM.LASTVALUE} too low'
               priority: HIGH
               manual_close: 'YES'
               dependencies:
@@ -2106,9 +2121,20 @@ zabbix_export:
             - tag: Component
               value: '5 Radio B'
           triggers:
+            - uuid: fd5c5a98b92c48dba6a650ede3f756ce
+              expression: 'last(/SAF BASIC Integra-X template V31 for Zabbix 6.0/integraXradioBrxLevel)>={$RXLEVMAX}'
+              name: 'Radio B Rx level {ITEM.LASTVALUE} too high'
+              priority: HIGH
+              manual_close: 'YES'
+              dependencies:
+                - name: 'Operational mode A'
+                  expression: 'last(/SAF BASIC Integra-X template V31 for Zabbix 6.0/integraXmodemConfigRunningTable)="A"'
+              tags:
+                - tag: Component
+                  value: RadioB
             - uuid: cbc0c7d30db844a69739a4d132ace94e
-              expression: 'last(/SAF BASIC Integra-X template V31 for Zabbix 6.0/integraXradioBrxLevel)<={$RXLEVMIN} or last(/SAF BASIC Integra-X template V31 for Zabbix 6.0/integraXradioBrxLevel)>={$RXLEVMAX}'
-              name: 'Radio B Rx level {ITEM.LASTVALUE}'
+              expression: 'last(/SAF BASIC Integra-X template V31 for Zabbix 6.0/integraXradioBrxLevel)<={$RXLEVMIN}'
+              name: 'Radio B Rx level {ITEM.LASTVALUE} too low'
               priority: HIGH
               manual_close: 'YES'
               dependencies:
@@ -2229,7 +2255,7 @@ zabbix_export:
           key: integraXsysCoordinates
           delay: 3h
           trends: '0'
-          value_type: TEXT
+          value_type: CHAR
           tags:
             - tag: Component
               value: '9 System'
@@ -2272,6 +2298,19 @@ zabbix_export:
               name: 'CPU temperature {ITEM.LASTVALUE} too low'
               priority: WARNING
               manual_close: 'YES'
+        - uuid: ed8f09c04d3d488ca0688e397ea87df4
+          name: 'System data'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.2.1.1.1.0
+          key: integraXsysDescr.IntE3
+          delay: 2h
+          trends: '0'
+          value_type: LOG
+          tags:
+            - tag: Component
+              value: '1 Overall Parameters'
+            - tag: Component
+              value: '9 System'
         - uuid: 1827f046c9da42dea2aec59999e02d7f
           name: 'Product code'
           type: DEPENDENT
@@ -2286,7 +2325,7 @@ zabbix_export:
                 - 'P/C: ([^ ]*);'
                 - \1
           master_item:
-            key: sysDescr.IntE3
+            key: integraXsysDescr.IntE3
           tags:
             - tag: Component
               value: '1 Overall Parameters'
@@ -2303,8 +2342,6 @@ zabbix_export:
           type: DEPENDENT
           key: integraXsysDeviceSerial
           delay: '0'
-          trends: '0'
-          value_type: TEXT
           description: 'Device serial number'
           inventory_link: SERIALNO_A
           preprocessing:
@@ -2313,7 +2350,7 @@ zabbix_export:
                 - 'S/N: ([^ ]*)'
                 - \1
           master_item:
-            key: sysDescr.IntE3
+            key: integraXsysDescr.IntE3
           tags:
             - tag: Component
               value: '1 Overall Parameters'
@@ -2339,7 +2376,7 @@ zabbix_export:
                 - 'Prod: ([^ ]*);'
                 - \1
           master_item:
-            key: sysDescr.IntE3
+            key: integraXsysDescr.IntE3
           tags:
             - tag: Component
               value: '1 Overall Parameters'
@@ -2466,6 +2503,92 @@ zabbix_export:
               name: 'System PSU voltage {ITEM.LASTVALUE} too low'
               priority: WARNING
               manual_close: 'YES'
+        - uuid: cabd24f3752f42eea833cb26bb51c04c
+          name: 'System contact details'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.2.1.1.4.0
+          key: 'integraXsystem.contact[sysContact.0]'
+          delay: 3h
+          history: 2w
+          trends: '0'
+          value_type: TEXT
+          inventory_link: CONTACT
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1d
+        - uuid: b7e99b8ed05f4ceaa64f5fc2e58bb347
+          name: 'Location name'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.2.1.1.6.0
+          key: integraXsystem.location
+          delay: 3h
+          history: 2w
+          trends: '0'
+          value_type: LOG
+          inventory_link: LOCATION
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: Component
+              value: '1 Overall Parameters'
+            - tag: Component
+              value: '9 System'
+        - uuid: b737ba67747549ce84fe1043ca249607
+          name: 'System name'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.2.1.1.5.0
+          key: integraXsystem.name
+          delay: 3h
+          history: 2w
+          trends: '0'
+          value_type: TEXT
+          inventory_link: NAME
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1h
+          tags:
+            - tag: Component
+              value: '1 Overall Parameters'
+            - tag: Component
+              value: '9 System'
+          triggers:
+            - uuid: 370120239dcd4a8bb8d71ec195af9220
+              expression: '(last(/SAF BASIC Integra-X template V31 for Zabbix 6.0/integraXsystem.name,#1)<>last(/SAF BASIC Integra-X template V31 for Zabbix 6.0/integraXsystem.name,#2))=1 and length(last(/SAF BASIC Integra-X template V31 for Zabbix 6.0/integraXsystem.name))>0'
+              name: 'System name has changed to (new name: {ITEM.LASTVALUE})'
+              priority: INFO
+              description: 'System name has changed. Ack to close.'
+              manual_close: 'YES'
+        - uuid: 54df7f4cdd884fb0a3984c7fc3772cdf
+          name: 'System uptime'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.2.1.1.3.0
+          key: 'integraXsystem.uptime[sysUpTime.0]'
+          history: 2w
+          trends: '0'
+          units: uptime
+          preprocessing:
+            - type: MULTIPLIER
+              parameters:
+                - '0.01'
+          tags:
+            - tag: Component
+              value: '1 Overall Parameters'
+            - tag: Component
+              value: '9 System'
+          triggers:
+            - uuid: be56dcc4b78d46969fa2e0e49d98f8ce
+              expression: 'last(/SAF BASIC Integra-X template V31 for Zabbix 6.0/integraXsystem.uptime[sysUpTime.0])<10m'
+              name: '{HOST.NAME} has been restarted (uptime < 10m)'
+              priority: INFO
+              description: 'Uptime is less than 10 minutes'
+              manual_close: 'YES'
+              dependencies:
+                - name: 'No SNMP data collection'
+                  expression: 'max(/SAF BASIC Integra-X template V31 for Zabbix 6.0/zabbix[host,snmp,available],{$SNMP.TIMEOUT})=0'
         - uuid: b02314c0913c4d8784331eaed383b483
           name: 'System Memory used'
           type: CALCULATED
@@ -2553,119 +2676,6 @@ zabbix_export:
               tags:
                 - tag: Component
                   value: RadioB
-        - uuid: ed8f09c04d3d488ca0688e397ea87df4
-          name: 'System data'
-          type: SNMP_AGENT
-          snmp_oid: .1.3.6.1.2.1.1.1.0
-          key: sysDescr.IntE3
-          delay: 2h
-          trends: '0'
-          value_type: LOG
-          tags:
-            - tag: Component
-              value: '1 Overall Parameters'
-            - tag: Component
-              value: '9 System'
-        - uuid: cabd24f3752f42eea833cb26bb51c04c
-          name: 'System contact details'
-          type: SNMP_AGENT
-          snmp_oid: 1.3.6.1.2.1.1.4.0
-          key: 'system.contact[sysContact.0]'
-          delay: 3h
-          history: 2w
-          trends: '0'
-          value_type: TEXT
-          inventory_link: CONTACT
-          preprocessing:
-            - type: DISCARD_UNCHANGED_HEARTBEAT
-              parameters:
-                - 1d
-        - uuid: b7e99b8ed05f4ceaa64f5fc2e58bb347
-          name: 'Location name'
-          type: SNMP_AGENT
-          snmp_oid: 1.3.6.1.2.1.1.6.0
-          key: system.location
-          delay: 3h
-          history: 2w
-          trends: '0'
-          value_type: LOG
-          inventory_link: LOCATION
-          preprocessing:
-            - type: DISCARD_UNCHANGED_HEARTBEAT
-              parameters:
-                - 1h
-          tags:
-            - tag: Component
-              value: '1 Overall Parameters'
-            - tag: Component
-              value: '9 System'
-        - uuid: b737ba67747549ce84fe1043ca249607
-          name: 'System name'
-          type: SNMP_AGENT
-          snmp_oid: 1.3.6.1.2.1.1.5.0
-          key: system.name
-          delay: 3h
-          history: 2w
-          trends: '0'
-          value_type: TEXT
-          inventory_link: NAME
-          preprocessing:
-            - type: DISCARD_UNCHANGED_HEARTBEAT
-              parameters:
-                - 1h
-          tags:
-            - tag: Component
-              value: '1 Overall Parameters'
-            - tag: Component
-              value: '9 System'
-          triggers:
-            - uuid: 370120239dcd4a8bb8d71ec195af9220
-              expression: '(last(/SAF BASIC Integra-X template V31 for Zabbix 6.0/system.name,#1)<>last(/SAF BASIC Integra-X template V31 for Zabbix 6.0/system.name,#2))=1 and length(last(/SAF BASIC Integra-X template V31 for Zabbix 6.0/system.name))>0'
-              name: 'System name has changed to (new name: {ITEM.LASTVALUE})'
-              priority: INFO
-              description: 'System name has changed. Ack to close.'
-              manual_close: 'YES'
-        - uuid: 42f916935ffc42b381365d94e9f3ea7b
-          name: 'System object ID'
-          type: SNMP_AGENT
-          snmp_oid: 1.3.6.1.2.1.1.2.0
-          key: 'system.objectid[sysObjectID.0]'
-          delay: 3h
-          history: 2w
-          trends: '0'
-          value_type: LOG
-          preprocessing:
-            - type: DISCARD_UNCHANGED_HEARTBEAT
-              parameters:
-                - 1h
-        - uuid: 54df7f4cdd884fb0a3984c7fc3772cdf
-          name: 'System uptime'
-          type: SNMP_AGENT
-          snmp_oid: 1.3.6.1.2.1.1.3.0
-          key: 'system.uptime[sysUpTime.0]'
-          delay: 5m
-          history: 2w
-          trends: '0'
-          units: uptime
-          preprocessing:
-            - type: MULTIPLIER
-              parameters:
-                - '0.01'
-          tags:
-            - tag: Component
-              value: '1 Overall Parameters'
-            - tag: Component
-              value: '9 System'
-          triggers:
-            - uuid: be56dcc4b78d46969fa2e0e49d98f8ce
-              expression: 'last(/SAF BASIC Integra-X template V31 for Zabbix 6.0/system.uptime[sysUpTime.0])<10m'
-              name: '{HOST.NAME} has been restarted (uptime < 10m)'
-              priority: INFO
-              description: 'Uptime is less than 10 minutes'
-              manual_close: 'YES'
-              dependencies:
-                - name: 'No SNMP data collection'
-                  expression: 'max(/SAF BASIC Integra-X template V31 for Zabbix 6.0/zabbix[host,snmp,available],{$SNMP.TIMEOUT})=0'
         - uuid: 85f46f5e688a4418ac504a1aec2e117e
           name: 'License status'
           type: SNMP_AGENT
@@ -2702,7 +2712,7 @@ zabbix_export:
               description: 'SNMP is not available for polling. Please check device connectivity and SNMP settings.'
               dependencies:
                 - name: 'Unavailable by ICMP ping'
-                  expression: 'max(/SAF BASIC Integra-X template V31 for Zabbix 6.0/icmpping,#3)=0'
+                  expression: 'max(/SAF BASIC Integra-X template V31 for Zabbix 6.0/integraXicmpping,#3)=0'
       tags:
         - tag: Equipment
           value: Integra-X
